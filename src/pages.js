@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getJson } from './apiContext'
 
 export const Home = () => (
     <div>
@@ -21,5 +22,13 @@ export const Gear = () => (
 export const Bikes = () => (
     <div>
         <h1>Bikes</h1>
+        <h3> { getJson() }</h3>
+    </div>
+)
+
+export const Details = () => (
+    <div>
+        <h1>Details</h1>
+        
     </div>
 )
