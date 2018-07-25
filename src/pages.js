@@ -22,7 +22,6 @@ export const Gear = () => (
 export const Bikes = () => (
     <div>
         <h1>Bikes</h1>
-        <h3> { getJson() }</h3>
     </div>
 )
 

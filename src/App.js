@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { Home, About, Gear, Bikes, Details } from './pages'
+import { Home, About, Gear, Bikes, Details } from './pages';
+import ProductsPage from './ProductsPage';
+import PostTest from './PostTest'
 import logo from './logo.svg';
 import './App.css';
 
@@ -13,7 +15,9 @@ const Main = () => (
       <Route exact path='/Gear' component={Gear} />
       <Route exact path='/Bikes' component={Bikes} />
       <Route exact path='/Bikes/:id' component={Details} />
+      <Route exact path='/posttest' component={PostTest} />
     </Switch>
+    <ProductsPage />
   </main>
 
 )
@@ -44,6 +48,7 @@ class Header extends Component {
         {path: "/About", text: "About", isActive: false},
         {path: "/Gear", text: "Gear", isActive: false},
         {path: "/Bikes", text: "Bikes", isActive: false},
+        {path: "/posttest", text: "post", isActive: false}
       ]
     }
   }
@@ -51,7 +56,7 @@ class Header extends Component {
   handleClick(item) {
     const links = this.state.links.slice(); 
     for (const i in links) {
-      links[i].isActive = item == i ;
+      links[i].isActive = item === i ;
     }
     this.setState({links: links});
   }
@@ -61,7 +66,7 @@ class Header extends Component {
     return (
       <div>
         <HeaderGraphic />
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
           {/*<Link className="navbar-brand" to="/">Home</Link>*/}
           <ul className="navbar-nav">
             {this.state.links.map((link, item) => 
@@ -74,6 +79,10 @@ class Header extends Component {
               /> 
               )}
           </ul>
+          <form className="form-inline my-2 my-lg-0">
+            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </nav>
 
         <Route path="/:id" component={Child} />
