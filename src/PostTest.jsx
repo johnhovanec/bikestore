@@ -8,7 +8,11 @@ class PostTest extends React.Component {
   }
 
   componentDidMount() {
-    var url = 'http://localhost:50813/api/products';
+    var url = 'http://localhost:50813/api/products/';
+    let headers = new Headers({
+      'Content-Type':'application/json; charset=utf-8;' 
+      ,'Accept':'*/*'
+    });
     var data = {
     	"name": "post example",
     	"manufacturer": "Huffy",
@@ -18,14 +22,16 @@ class PostTest extends React.Component {
     	"price": 99.75
     	};
 
+	console.log("ready to send fetch...")
 	// var request = new XMLHttpRequest();
 	// request.open('POST', url, true);
-	// request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+	// request.setRequestHeader('Content-Type', 'application/json');
+	// request.setRequestHeader('Accept', '*/*');
 	// request.send(data);
-	console.log("ready to send fetch...")
+
     fetch(url, {
       method: 'POST', 
-      mode: 'no-cors',
+      mode: 'cors',
       headers:{
       	'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
