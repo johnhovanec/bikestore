@@ -28,6 +28,6 @@ export const Bikes = () => (
 export const Details = () => (
     <div>
         <h1>Details</h1>
-        
+        <h3>{this.props}</h3>
     </div>
 )

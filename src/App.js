@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Home, About, Gear, Bikes, Details } from './pages';
 import ProductsPage from './ProductsPage';
+import DetailPage from './DetailPage';
 import PostTest from './PostTest'
 import logo from './logo.svg';
 import './App.css';
@@ -85,15 +86,16 @@ class Header extends Component {
           </form>
         </nav>
 
-        <Route path="/:id" component={Child} />
+        <Route path="/bikes/:id" component={ItemDetail} />
       </div>
     );
   }
 }
 
-const Child = ({ match }) => (
+const ItemDetail = ({ match }) => (
   <div>
     <h3>ID: {match.params.id}</h3>
+    <DetailPage />
   </div>
 );
 
