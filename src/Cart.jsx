@@ -1,25 +1,24 @@
 import React from 'react';
 
 
-class PostTest extends React.Component {
+class Cart extends React.Component {
   constructor() {
       super();
-      this.state = {productList: []};
+      this.state = {cartList: []};
   }
 
   componentDidMount() {
-    var url = 'http://localhost:50813/api/products/';
+    var url = 'http://localhost:50813/api/shoppingcarts';
     let headers = new Headers({
       'Content-Type':'application/json; charset=utf-8;'
       ,'Accept':'*/*'
     });
     var data = {
-    	"name": "post example",
-    	"manufacturer": "Huffy",
-    	"model": "Eliminator II",
-    	"type": "Road",
-    	"color": "yellow",
-    	"price": 88.75
+        "customerId":1,"cartTimeStamp":"2018-08-12T22:12:32.2957723",
+        "orderPlaced":null,
+        "orderPlacedTimeStamp":null,
+        "paymentMethod":null,
+        "customer":null
     	};
 
 	console.log("ready to send fetch...")
@@ -43,12 +42,12 @@ class PostTest extends React.Component {
   }
 
   render() {
-    let productList =  <li><i>Post sent</i></li>;
+    let cartList =  <li><i>Post sent</i></li>;
 
     return <ul>
-      {productList}
+      {cartList}
     </ul>;
   }
 }
 
-export default PostTest;
+export default Cart;
