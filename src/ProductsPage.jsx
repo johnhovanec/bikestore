@@ -1,6 +1,5 @@
 import React from 'react';
-
-
+import ProductResults from './pages/ProductResults';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -25,21 +24,9 @@ class ProductsPage extends React.Component {
       this.state = {productList: []};
   }
 
-  search(query, cb) {
-  	console.log("In ProductsPage search...");
-    fetch(`http://localhost:50813/api/products?q=${query}`, {headers: new Headers({
-        "Accept": "application/json"    })})
-      	.then(response => response.json())
-      	.then(products => this.setState({productList: products}))
-      	.catch(error => console.log(error))
-  }
   
   componentDidMount() {
-    fetch("http://localhost:50813/api/products", {headers: new Headers({
-        "Accept": "application/json"    })})
-        .then(response => response.json())
-        .then(products => this.setState({productList: products}))
-        .catch(error => console.log(error))
+    <ProductResults />
   }
 
   

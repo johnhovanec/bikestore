@@ -35,9 +35,7 @@ class Header extends Component {
   onSearchSubmit(evt) {
   	evt.preventDefault();
     console.log("Search clicked: " + evt.target.value);
-    history.push({
-    	search: '?searchTerm=trek'
-    })
+    
   }
 
 

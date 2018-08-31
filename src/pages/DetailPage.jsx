@@ -21,9 +21,11 @@ class DetailPage extends React.Component {
                            ${product.price}
                         </li>);
 
-    return <ul>
-      {productList}
-    </ul>;
+    return (
+      <ul>
+        {productList}
+      </ul>
+    );
   }
 };
 

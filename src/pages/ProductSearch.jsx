@@ -11,6 +11,7 @@ class ProductSearch extends React.Component {
   };
 
   handleSearchChange = (e) => {
+    console.log("handleSearchChange " + e.target.value);
     const searchTerm = e.target.value;
 
     this.setState({
