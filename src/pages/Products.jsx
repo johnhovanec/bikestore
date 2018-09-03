@@ -1,7 +1,7 @@
 import React from 'react';
 import Client from './../Client';
 
-const MAX_NUMBER_OF_PRODUCTS = 10;
+const MAX_NUMBER_OF_PRODUCTS = 15;
 
 class ProductSearch extends React.Component {
   state = {
@@ -139,7 +139,7 @@ class ProductSearch extends React.Component {
                     <i
                     className='big remove icon red'
                   /> 
-                  }
+                }
 
                   {/* {
                     this.state.addToCartIcon ? (

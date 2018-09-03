@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Client from './../Client';
 import ShoppingCart from './ShoppingCart';
 import Products from './Products';
+import history from './../history';
 
 class ProductsContainer extends React.Component {
   state = {
@@ -45,10 +46,11 @@ class ProductsContainer extends React.Component {
                 // this.setState({
                 //   productsSelected: this.state.productsSelected.concat(product),
                 // })
-                console.log("Detail clicked for id: " + product.id + " model:" + product.model),
-                this.setState({
-                  productsSelected: this.state.productsSelected.concat(product),
-                })
+                // console.log("Detail clicked for id: " + product.id + " model:" + product.model),
+                // this.setState({
+                //   productsSelected: this.state.productsSelected.concat(product)
+                // })
+                history.push('/products/' + product.id)
               )
             }
           />
