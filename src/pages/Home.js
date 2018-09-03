@@ -1,8 +1,10 @@
 import React from 'react';
+import Client from './../Client';
 
 const Home = () => (
   <div>
     <h3>Home page</h3>
+    <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
     <p>
       Bacon ipsum dolor amet cillum bresaola pig tri-tip, picanha elit meatball exercitation duis 
       dolore spare ribs veniam enim short loin id. Nostrud biltong in nulla anim commodo pancetta ut 

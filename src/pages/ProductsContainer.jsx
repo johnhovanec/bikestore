@@ -15,6 +15,7 @@ class ProductsContainer extends React.Component {
     return (
       <div className='App'>
         <div className='shopping-cart-container'>
+          <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
           <ShoppingCart
               products={this.state.productsSelected}
               onProductClick={

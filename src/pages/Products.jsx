@@ -62,10 +62,10 @@ class ProductSearch extends React.Component {
   render() {
     return (
       <div id=''>
-        <table className='ui selectable structured large table'>
+        <table className='table table-hover'>
           <thead>
             <tr>
-              <th colSpan='8'>
+              <th scope="col" colSpan='8'>
                 <div className='ui fluid search'>
                   <div className='ui icon input'>
                     <input
@@ -89,14 +89,14 @@ class ProductSearch extends React.Component {
               </th>
             </tr>
             <tr>
-              <th className='eight wide'>Description</th>
-              <th>Model</th>
-              <th>Manufacturer</th>
-              <th>Color</th>
-              <th>Size</th>
-              <th>Price</th>
-              <th>Details</th>
-              <th>Add To Cart</th>
+              <th scope="col">Description</th>
+              <th scope="col">Model</th>
+              <th scope="col">Manufacturer</th>
+              <th scope="col">Color</th>
+              <th scope="col">Size</th>
+              <th scope="col">Price</th>
+              <th scope="col">Details</th>
+              <th scope="col">Add To Cart</th>
             </tr>
           </thead>
           <tbody>

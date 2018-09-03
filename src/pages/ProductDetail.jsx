@@ -1,14 +1,11 @@
 import React from 'react';
 import Client from './../Client';
 
-const MAX_NUMBER_OF_PRODUCTS = 1;
-
 class ProductDetail extends React.Component {
   state = {
     product: {},
     clearSearchIcon: false,
     addToCartIcon: '',
-    searchValue: '',
   };
 
   componentDidMount() {
@@ -23,20 +20,11 @@ class ProductDetail extends React.Component {
   render() {
     return (
       <div id=''>
+      	<p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
         <table className='ui selectable structured large table'>
           <thead>
             <tr>
               <th colSpan='8'>
-                <div className='ui fluid search'>
-                  {
-                    this.state.clearSearchIcon ? (
-                      <i
-                        className='big remove icon'
-                        onClick={this.onRemoveIconClick}
-                      />
-                    ) : ''
-                  }
-                </div>
               </th>
             </tr>
             <tr>
@@ -52,38 +40,30 @@ class ProductDetail extends React.Component {
           </thead>
           <tbody>
           {
-            
-              <tr
-                
-                // onClick={() => this.props.onProductClick(product)}
-              >
-                <td>{this.state.product.description}</td>
-                <td className='right aligned'>
-                  {this.state.product.model}
-                </td>
-                <td className='right aligned'>
-                  {this.state.product.manufacturer}
-                </td>
-                <td className='right aligned'>
-                  {this.state.product.color}
-                </td>
-                <td className='right aligned'>
-                  {this.state.product.size}
-                </td>
-                <td className='right aligned'>
-                  {this.state.product.price}
-                </td>
-              </tr>   
+	          <tr>
+	            <td>{this.state.product.description}</td>
+	            <td className='right aligned'>
+	              {this.state.product.model}
+	            </td>
+	            <td className='right aligned'>
+	              {this.state.product.manufacturer}
+	            </td>
+	            <td className='right aligned'>
+	              {this.state.product.color}
+	            </td>
+	            <td className='right aligned'>
+	              {this.state.product.size}
+	            </td>
+	            <td className='right aligned'>
+	              {this.state.product.price}
+	            </td>
+	          </tr>   
           }
           </tbody>
         </table>
       </div>
     );
   }
-}
-
-function checkQuantity(product) {
-  return (product.inventoryQuantity > 0 );
 }
 
 export default ProductDetail;

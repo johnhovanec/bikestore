@@ -32,5 +32,34 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, getDetail };
+function setCookie(name, value, duration) {
+    var expires = "";
+    if (duration) {
+        var date = new Date();
+        date.setTime(date.getTime() + (duration * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var targetCookie = name + "=";
+    var documentCookies = document.cookie.split(';');
+    for(var i = 0; i < documentCookies.length; i++) {
+        var cookie = documentCookies[i];
+        while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1, cookie.length);
+        }
+
+        if (cookie.indexOf(targetCookie) === 0) 
+          return cookie.substring(targetCookie.length, cookie.length);
+    }
+    return "Error: unable to get cookie";
+}
+
+function deleteCookie(name) {   
+    document.cookie = name+'=; Max-Age=-99999999;';  
+}
+
+const Client = { search, getDetail, setCookie, getCookie, deleteCookie };
 export default Client;

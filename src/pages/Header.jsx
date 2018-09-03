@@ -55,13 +55,11 @@ class Header extends Component {
               />
               )}
           </ul>
-          <form className="form-inline my-2 my-lg-0" onSubmit={this.onSearchSubmit}>
+          {/*<form className="form-inline my-2 my-lg-0" onSubmit={this.onSearchSubmit}>
             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
             <button className="btn btn-outline-success my-2 my-sm-0">Search</button>
-          </form>
+          </form>*/}
         </nav>
-
-        <Route path="/bikes/:id" component={ItemDetail} />
       </div>
     );
   }
@@ -96,11 +94,5 @@ class NavLink extends Component {
   }
 }
 
-const ItemDetail = ({ match }) => (
-  <div>
-    <h3>ID: {match.params.id}</h3>
-    <Products />
-  </div>
-);
 
 export default Header;

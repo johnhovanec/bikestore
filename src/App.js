@@ -8,16 +8,24 @@ import ShoppingCart from './pages/ShoppingCart';
 import Header from './pages/Header';
 import Home from './pages/Home';
 import About from './pages/About';
+import Client from './Client'
 import history from './history';
+import uuid from 'uuid';
 // import PostTest from './PostTest';
 // import Cart from './Cart';
 // import GetCart from './GetCart';
 import './App.css';
 
+// Create a unique sessionId for the session to expire in 1 day
+const uuidv1 = require('uuid/v1');
+const sessionId = uuidv1();
+console.log("sessionId: " + sessionId);
+Client.setCookie("sessionId", sessionId, 1);
 
 const App = () => (
   <Router history={history}>
     <div>
+      <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
       <Header />
       <Route exact path="/" component={Home} />
       <Route exact path="/Home" component={Home} />
