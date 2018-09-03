@@ -16,6 +16,7 @@ class Header extends Component {
         {path: "/Home", text: "Home", isActive: false},
         {path: "/About", text: "About", isActive: false},
         {path: "/Products", text: "Bikes", isActive: false},
+        {path: "/Cart", text: "Cart", isActive: false},
         // {path: "/posttest", text: "post", isActive: false},
         // {path: "/cart", text: "Add To Cart", isActive: false},
         // {path: "/getcart", text: "Get Cart", isActive: false},

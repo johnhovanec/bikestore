@@ -1,5 +1,26 @@
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.App {
+  margin-top: 5em;
+}
+
+#food-search {
+  margin-top: 5em;
+}
+
+.products-container {
+  display: block;
+  float: left;
+  margin: 0 100px;
+}
+
+.shopping-cart-container {
+  display: block;
+  float: right;
+  margin: 0 50px;
 }
