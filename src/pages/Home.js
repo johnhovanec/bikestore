@@ -1,56 +1,17 @@
-import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import { Home, About, Gear, Bikes, Details } from './pages';
-import ProductsPage from './ProductsPage';
-import PostTest from './PostTest';
-import Cart from './Cart';
-import GetCart from './GetCart';
-import ProductSearch from './pages/ProductSearch';
-import Header from './pages/Header';
-import './App.css';
+import React from 'react';
+
+const Home = () => (
+  <div>
+    <h3>Home page</h3>
+    <p>
+      Bacon ipsum dolor amet cillum bresaola pig tri-tip, picanha elit meatball exercitation duis 
+      dolore spare ribs veniam enim short loin id. Nostrud biltong in nulla anim commodo pancetta ut 
+      buffalo pig ad cillum. Non pancetta bresaola ham hock, prosciutto shank ullamco. Esse et sirloin 
+      ribeye spare ribs est pig t-bone venison beef ribs cupim nulla chicken. Laboris shoulder biltong 
+      adipisicing, nulla rump meatball ut kielbasa.
+    </p>
+  </div>
+);
 
 
-const Main = () => (
-  <main>
-    <Switch>
-      <Route exact path='/Home' component={Home} />
-      <Route exact path='/About' component={About}/>
-      <Route exact path='/Gear' component={Gear} />
-      <Route exact path='/Bikes' component={Bikes} />
-      <Route exact path='/Bikes/:id' component={Details} />
-      <Route exact path='/posttest' component={PostTest} />
-      <Route exact path='/cart' component={Cart} />
-      <Route exact path='/getcart' component={Cart} />
-    </Switch>
-    <ProductsPage />
-  </main>
-
-)
-
-
-class App extends React.Component {
-  state = {
-    selectedProducts: [],
-  };
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <Main />
-        <ProductSearch 
-          onProductClick={
-              (product) => (
-                this.setState({
-                  selectedProducts: this.state.selectedProducts.concat(product),
-                })
-              )
-            }
-        />
-      </div>
-    );
-  }
-}
-export default App;
-
-
+export default Home;
