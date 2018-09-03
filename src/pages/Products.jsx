@@ -1,6 +1,6 @@
 import React from 'react';
 
-class DetailPage extends React.Component {
+class Products extends React.Component {
   constructor() {
       super();
       this.state = {productList: []};
@@ -29,4 +29,4 @@ class DetailPage extends React.Component {
   }
 };
 
-export default DetailPage;
+export default Products;

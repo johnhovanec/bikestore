@@ -6,8 +6,7 @@ import PostTest from './PostTest';
 import Cart from './Cart';
 import GetCart from './GetCart';
 import ProductSearch from './pages/ProductSearch';
-import Product from './pages/Product';
-import DetailPage from './pages/DetailPage';
+import Products from './pages/Products';
 import Detail from './pages/Detail';
 import Header from './pages/Header';
 import './App.css';
@@ -18,8 +17,8 @@ const App = () => (
     <div>
       <Header />
       <Route exact path="/" component={Home} />
-      <Route exact path="/product" component={DetailPage} />
-      <Route exact path="/product/:id" component={Detail} />
+      <Route exact path="/products" component={Products} />
+      <Route exact path="/products/:id" component={Detail} />
     </div>
   </BrowserRouter>
 )

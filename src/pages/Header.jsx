@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import DetailPage from './DetailPage';
+import Products from './Products';
 import logo from '../logo.svg';
 import createHistory from "history/createBrowserHistory"
 
@@ -15,11 +15,10 @@ class Header extends Component {
       links: [
         {path: "/Home", text: "Home", isActive: false},
         {path: "/About", text: "About", isActive: false},
-        {path: "/Gear", text: "Gear", isActive: false},
-        {path: "/Bikes", text: "Bikes", isActive: false},
-        {path: "/posttest", text: "post", isActive: false},
-        {path: "/cart", text: "Add To Cart", isActive: false},
-        {path: "/getcart", text: "Get Cart", isActive: false}
+        {path: "/Products", text: "Bikes", isActive: false},
+        // {path: "/posttest", text: "post", isActive: false},
+        // {path: "/cart", text: "Add To Cart", isActive: false},
+        // {path: "/getcart", text: "Get Cart", isActive: false},
       ]
     }
   }
@@ -101,7 +100,7 @@ class NavLink extends Component {
 const ItemDetail = ({ match }) => (
   <div>
     <h3>ID: {match.params.id}</h3>
-    <DetailPage />
+    <Products />
   </div>
 );
 
