@@ -9,11 +9,83 @@ function search(query, callback) {
 
 function getDetail(query, callback) {
   return fetch(`http://localhost:50813/api/products/${query}`, {
+    method: "GET",
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON)
     .then(callback)
     .catch((error) => console.log(error.message));
+}
+
+function getCartDetail(query, callback) {
+  return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
+    method: "GET",
+    accept: 'application/json',
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(callback)
+    .catch((error) => console.log(error.message));
+}
+
+function updateCart(data, callback) {
+  data = {
+        "customerid": 12334,
+        "carttimestamp": new Date()
+        };
+  return fetch(`http://localhost:50813/api/shoppingcartproducts/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
+}
+
+function addToCart(data, callback) {
+  var url = 'http://localhost:50813/api/shoppingcarts/';
+    let headers = new Headers({
+      'Content-Type':'application/json; charset=utf-8;'
+      ,'Accept':'*/*'
+    });
+
+    // check for an existing cart with customerId
+    let existingCustId = getCookie("customerId");
+    debugger;
+    let z = getCartDetail(existingCustId);
+    if (!getCartDetail(existingCustId))
+    {
+      // to generate faux customerIds
+      let date = new Date();
+      let custId = Math.round(date.getTime() / 1000);
+      setCookie("customerId", custId, 1);
+      let data = {
+        "customerid": custId,
+        "carttimestamp": new Date()
+        };
+      debugger;
+      console.log("ready to send fetch...")
+
+      fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
+    }
+    else
+    {
+      console.log("Cart already exists for Id: " + existingCustId);
+      updateCart(data);
+    }
 }
 
 function checkStatus(response) {
@@ -61,5 +133,5 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
-const Client = { search, getDetail, setCookie, getCookie, deleteCookie };
+const Client = { search, getDetail, addToCart, setCookie, getCookie, deleteCookie };
 export default Client;

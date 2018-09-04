@@ -52,8 +52,7 @@ export default function ShoppingCart(props) {
   );
 }
 
-// Good example of a helper function specific to this module
-// that is inaccessible from outside this module.
+// helper function
 function sumProducts(products, prop) {
   return products.reduce((memo, product) => (
     parseFloat(product[prop], 10) + memo

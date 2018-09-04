@@ -16,6 +16,7 @@ class ProductsContainer extends React.Component {
       <div className='App'>
         <div className='shopping-cart-container'>
           <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
+          <p><b>customerId:</b> {Client.getCookie("customerId")}</p>
           <ShoppingCart
               products={this.state.productsSelected}
               onProductClick={
@@ -38,7 +39,8 @@ class ProductsContainer extends React.Component {
               (product) => (
                 this.setState({
                   productsSelected: this.state.productsSelected.concat(product),
-                })
+                }),
+                Client.addToCart(product)
               )
             }
 
