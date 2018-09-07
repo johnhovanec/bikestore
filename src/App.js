@@ -22,6 +22,11 @@ const sessionId = uuidv1();
 console.log("sessionId: " + sessionId);
 Client.setCookie("sessionId", sessionId, 1);
 
+// to generate faux customerIds
+let date = new Date();
+let custId = Math.round(date.getTime() / 1000);
+Client.setCookie("customerId", custId, 1);
+
 const App = () => (
   <Router history={history}>
     <div>
