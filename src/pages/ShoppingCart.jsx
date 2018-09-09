@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function ShoppingCart(props) {
+
   return (
     <table className='ui selectable structured large table'>
       <thead>

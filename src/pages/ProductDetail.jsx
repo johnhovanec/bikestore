@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from './../Client';
+import { FaThumbsUp } from 'react-icons/fa';
 
 class ProductDetail extends React.Component {
   state = {
@@ -34,7 +35,7 @@ class ProductDetail extends React.Component {
               <th>Color</th>
               <th>Size</th>
               <th>Price</th>
-              <th>Details</th>
+              <th><FaThumbsUp /></th>
               <th>Add To Cart</th>
             </tr>
           </thead>
@@ -56,6 +57,9 @@ class ProductDetail extends React.Component {
 	            </td>
 	            <td className='right aligned'>
 	              {this.state.product.price}
+	            </td>
+	            <td className='right aligned'>
+	              {this.state.product.rating}
 	            </td>
 	          </tr>   
           }

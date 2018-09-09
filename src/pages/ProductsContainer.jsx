@@ -5,11 +5,20 @@ import ShoppingCart from './ShoppingCart';
 import Products from './Products';
 import history from './../history';
 
+function filterId(products) {
+  console.log("+_+ " + products);
+}
+
+
 class ProductsContainer extends React.Component {
   state = {
     productsSelected: [],
     addToCartIcon: true, // TODO: set state here to control what can be added to cart
   };
+
+  componentDidUpdate() {
+    console.log("ShoppingCart + Products has mounted");
+  }
 
   render() {
     return (
@@ -39,20 +48,13 @@ class ProductsContainer extends React.Component {
               (product) => (
                 this.setState({
                   productsSelected: this.state.productsSelected.concat(product),
-                }),
-                Client.addToCart(product)
+                })//,
+                //Client.addToCart(product)
               )
             }
 
             onDetailClick={
               (product) => (
-                // this.setState({
-                //   productsSelected: this.state.productsSelected.concat(product),
-                // })
-                // console.log("Detail clicked for id: " + product.id + " model:" + product.model),
-                // this.setState({
-                //   productsSelected: this.state.productsSelected.concat(product)
-                // })
                 history.push('/products/' + product.id)
               )
             }
