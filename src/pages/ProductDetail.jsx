@@ -1,22 +1,48 @@
 import React from 'react';
 import Client from './../Client';
 import { FaThumbsUp } from 'react-icons/fa';
+import { FaChevronCircleUp } from 'react-icons/fa';
+
 
 class ProductDetail extends React.Component {
-  state = {
-    product: {},
-    clearSearchIcon: false,
-    addToCartIcon: '',
-  };
+	constructor(props) {
+		super(props);
+		this.state = {
+		    product: {},
+		    rating: 0,
+		    clearSearchIcon: false,
+		    addToCartIcon: '',
+		};
+	}
+  
 
   componentDidMount() {
     console.log("Product Detail Component mounted and now calling populate for id: " + this.props.match.params.id);
     Client.getDetail(this.props.match.params.id, (product) => {
       this.setState({
         product: product,
+        rating: product.rating,
       });
     });
   }
+
+  incrementRating() {
+  	console.log("In incrementRating");
+  	this.setState({
+  		rating: parseInt(this.state.rating) + 1
+  	});
+  };
+
+  decrementRating() {
+  	console.log("In incrementRating");
+  	this.setState({
+  		rating: parseInt(this.state.rating) - 1
+  	});
+  };
+
+
+
+
 
   render() {
     return (
@@ -59,7 +85,9 @@ class ProductDetail extends React.Component {
 	              {this.state.product.price}
 	            </td>
 	            <td className='right aligned'>
-	              {this.state.product.rating}
+	              <button onClick={(e) => this.decrementRating(e)}> - </button>
+	              {this.state.rating} 
+	              <button onClick={(e) => this.incrementRating(e)}> + </button>
 	            </td>
 	          </tr>   
           }
