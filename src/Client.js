@@ -7,7 +7,7 @@ function search(query, callback) {
     .catch((error) => console.log(error.message));
 }
 
-function getDetail(query, callback) {
+function getProduct(query, callback) {
   return fetch(`http://localhost:50813/api/products/${query}`, {
     method: "GET",
     accept: 'application/json',
@@ -16,6 +16,27 @@ function getDetail(query, callback) {
     .then(callback)
     .catch((error) => console.log(error.message));
 }
+
+function updateProduct(query, callback) {
+  var url = 'http://localhost:50813/api/products/1';
+    let headers = new Headers({
+      'Content-Type':'application/json; charset=utf-8;'
+      ,'Accept':'*/*'
+    });
+
+    fetch(url, {
+      method: 'PATCH',
+      mode: 'cors',
+      headers:{
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(query),
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+}
+
 
 function getCartDetail(query, callback) {
   return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
@@ -133,5 +154,5 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
-const Client = { search, getDetail, addToCart, setCookie, getCookie, deleteCookie };
+const Client = { search, getProduct, updateProduct, addToCart, setCookie, getCookie, deleteCookie };
 export default Client;

@@ -5,6 +5,7 @@ import ProductSearch from './pages/ProductSearch';
 import ProductsContainer from './pages/ProductsContainer';
 import ProductDetail from './pages/ProductDetail';
 import ShoppingCart from './pages/ShoppingCart';
+import Login from './pages/Login';
 import Header from './pages/Header';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -38,6 +39,7 @@ const App = () => (
       <Route exact path="/products" component={ProductsContainer} />
       <Route exact path="/products/:id" component={ProductDetail} />
       <Route exact path="/cart" component={ShoppingCart} />
+      <Route exact path="/login" component={Login} />
     </div>
   </Router>
 )

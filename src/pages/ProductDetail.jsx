@@ -18,7 +18,7 @@ class ProductDetail extends React.Component {
 
   componentDidMount() {
     console.log("Product Detail Component mounted and now calling populate for id: " + this.props.match.params.id);
-    Client.getDetail(this.props.match.params.id, (product) => {
+    Client.getProduct(this.props.match.params.id, (product) => {
       this.setState({
         product: product,
         rating: product.rating,
@@ -26,15 +26,52 @@ class ProductDetail extends React.Component {
     });
   }
 
+
   incrementRating() {
-  	console.log("In incrementRating");
-  	this.setState({
-  		rating: parseInt(this.state.rating) + 1
-  	});
+  	console.log("In incrementRating, updating rating");
+  	// this.setState({
+  	// 	rating: parseInt(this.state.rating) + 1
+  	// });
+
+  	// this.setState((state, props) => ({
+  	//   rating: state.rating + 1
+  	// }));
+
+  	this.setState((prevState, props) => ({
+  	    rating: parseInt(this.state.rating) + 1
+  	})); 
+
+  	var data = [{"op": "replace", "path": "/rating", "value": "121"}];
+ 	Client.updateProduct(data);
+ //  	var url = 'http://localhost:50813/api/products/1';
+ //    let headers = new Headers({
+ //      'Content-Type':'application/json; charset=utf-8;'
+ //      ,'Accept':'*/*'
+ //    });
+ //    var data = [{"op": "replace", "path": "/rating", "value": this.state.rating}];
+
+	// console.log("ready to send fetch fpr PATCH...")
+	// // var request = new XMLHttpRequest();
+	// // request.open('POST', url, true);
+	// // request.setRequestHeader('Content-Type', 'application/json');
+	// // request.setRequestHeader('Accept', '*/*');
+	// // request.send(data);
+
+ //    fetch(url, {
+ //      method: 'PATCH',
+ //      mode: 'cors',
+ //      headers:{
+ //      	'Accept': 'application/json, text/plain, */*',
+ //        'Content-Type': 'application/json'
+ //      },
+ //      body: JSON.stringify(data),
+ //    }).then(res => res.json())
+ //    .catch(error => console.error('Error:', error))
+ //    .then(response => console.log('Success:', response));
   };
 
   decrementRating() {
-  	console.log("In incrementRating");
+  	console.log("In decrementRating");
   	this.setState({
   		rating: parseInt(this.state.rating) - 1
   	});

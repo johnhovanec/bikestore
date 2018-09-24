@@ -17,7 +17,7 @@ class ProductsContainer extends React.Component {
   };
 
   componentDidUpdate() {
-    console.log("ShoppingCart + Products has mounted");
+    console.log("ShoppingCart has mounted for " + Client.getCookie("sessionId"));
   }
 
   render() {
