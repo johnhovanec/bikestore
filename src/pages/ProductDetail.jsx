@@ -26,6 +26,15 @@ class ProductDetail extends React.Component {
     });
   }
 
+  componentDidUpdate(){
+  	console.log("Detail updating");
+  }
+
+  // updateRating(rating) {
+  // 	console.log("ey, there!");
+  // 	Client.updateProductRating(this.state.rating);
+  // }
+
 
   incrementRating() {
   	console.log("In incrementRating, updating rating");
@@ -33,16 +42,29 @@ class ProductDetail extends React.Component {
   	// 	rating: parseInt(this.state.rating) + 1
   	// });
 
+  	// this.setState({
+  	//   rating: parseInt(this.state.rating) + 1
+  	// },(updateRating) => { 
+  	//  console.log("@ updating rating state:", updateRating(this.state.rating))
+  	// });
+
+  	this.setState({
+  	       rating: parseInt(this.state.rating) + 1
+  	    },() => { 
+  	    // Do something here.
+  	     console.log("### updating rating state:", this.state.rating) 
+  	     Client.updateProductRating(this.state.rating);
+  	  });
   	// this.setState((state, props) => ({
   	//   rating: state.rating + 1
   	// }));
 
-  	this.setState((prevState, props) => ({
-  	    rating: parseInt(this.state.rating) + 1
-  	})); 
+  	// this.setState((prevState, props) => ({
+  	//     rating: parseInt(this.state.rating) + 1
+  	// })); 
 
-  	var data = [{"op": "replace", "path": "/rating", "value": "121"}];
- 	Client.updateProduct(data);
+  // 	var data = [{"op": "replace", "path": "/rating", "value": "33"}];
+ 	// Client.updateProductRating(this.state.rating);
  //  	var url = 'http://localhost:50813/api/products/1';
  //    let headers = new Headers({
  //      'Content-Type':'application/json; charset=utf-8;'

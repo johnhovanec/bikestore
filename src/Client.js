@@ -17,7 +17,8 @@ function getProduct(query, callback) {
     .catch((error) => console.log(error.message));
 }
 
-function updateProduct(query, callback) {
+function updateProductRating(query, callback) {
+  var data = [{"op": "replace", "path": "/rating", "value": query}];
   var url = 'http://localhost:50813/api/products/1';
     let headers = new Headers({
       'Content-Type':'application/json; charset=utf-8;'
@@ -32,7 +33,7 @@ function updateProduct(query, callback) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(query),
-    }).then(res => res.json())
+    }).then(res => res.text())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));
 }
@@ -154,5 +155,5 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
-const Client = { search, getProduct, updateProduct, addToCart, setCookie, getCookie, deleteCookie };
+const Client = { search, getProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie };
 export default Client;
