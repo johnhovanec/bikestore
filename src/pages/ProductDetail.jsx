@@ -30,73 +30,24 @@ class ProductDetail extends React.Component {
   	console.log("Detail updating");
   }
 
-  // updateRating(rating) {
-  // 	console.log("ey, there!");
-  // 	Client.updateProductRating(this.state.rating);
-  // }
-
-
   incrementRating() {
-  	console.log("In incrementRating, updating rating");
-  	// this.setState({
-  	// 	rating: parseInt(this.state.rating) + 1
-  	// });
-
-  	// this.setState({
-  	//   rating: parseInt(this.state.rating) + 1
-  	// },(updateRating) => { 
-  	//  console.log("@ updating rating state:", updateRating(this.state.rating))
-  	// });
-
   	this.setState({
-  	       rating: parseInt(this.state.rating) + 1
-  	    },() => { 
-  	    // Do something here.
-  	     console.log("### updating rating state:", this.state.rating) 
-  	     Client.updateProductRating(this.state.rating);
-  	  });
-  	// this.setState((state, props) => ({
-  	//   rating: state.rating + 1
-  	// }));
-
-  	// this.setState((prevState, props) => ({
-  	//     rating: parseInt(this.state.rating) + 1
-  	// })); 
-
-  // 	var data = [{"op": "replace", "path": "/rating", "value": "33"}];
- 	// Client.updateProductRating(this.state.rating);
- //  	var url = 'http://localhost:50813/api/products/1';
- //    let headers = new Headers({
- //      'Content-Type':'application/json; charset=utf-8;'
- //      ,'Accept':'*/*'
- //    });
- //    var data = [{"op": "replace", "path": "/rating", "value": this.state.rating}];
-
-	// console.log("ready to send fetch fpr PATCH...")
-	// // var request = new XMLHttpRequest();
-	// // request.open('POST', url, true);
-	// // request.setRequestHeader('Content-Type', 'application/json');
-	// // request.setRequestHeader('Accept', '*/*');
-	// // request.send(data);
-
- //    fetch(url, {
- //      method: 'PATCH',
- //      mode: 'cors',
- //      headers:{
- //      	'Accept': 'application/json, text/plain, */*',
- //        'Content-Type': 'application/json'
- //      },
- //      body: JSON.stringify(data),
- //    }).then(res => res.json())
- //    .catch(error => console.error('Error:', error))
- //    .then(response => console.log('Success:', response));
+	       rating: parseInt(this.state.rating) + 1
+	    },() => { 
+	    // setState is asynchronous, the following is executed after the callback returns
+	     console.log("++ updating inc rating:", this.state.rating) 
+	     Client.updateProductRating(this.props.match.params.id, this.state.rating);
+	 });
   };
 
   decrementRating() {
-  	console.log("In decrementRating");
   	this.setState({
-  		rating: parseInt(this.state.rating) - 1
-  	});
+	       rating: parseInt(this.state.rating) - 1
+	    },() => { 
+	    // setState is asynchronous, the following is executed after the callback returns
+	     console.log("-- updating dec rating:", this.state.rating) 
+	     Client.updateProductRating(this.props.match.params.id, this.state.rating);
+	 });
   };
 
 

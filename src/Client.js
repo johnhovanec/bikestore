@@ -1,3 +1,5 @@
+// Retrieve products that match the searchTerm entered
+// GET api/products/
 function search(query, callback) {
   return fetch(`http://localhost:50813/api/products?searchTerm=${query}`, {
     accept: 'application/json',
@@ -7,6 +9,8 @@ function search(query, callback) {
     .catch((error) => console.log(error.message));
 }
 
+// Retrieve a single product
+// GET api/products/1
 function getProduct(query, callback) {
   return fetch(`http://localhost:50813/api/products/${query}`, {
     method: "GET",
@@ -17,9 +21,11 @@ function getProduct(query, callback) {
     .catch((error) => console.log(error.message));
 }
 
-function updateProductRating(query, callback) {
-  var data = [{"op": "replace", "path": "/rating", "value": query}];
-  var url = 'http://localhost:50813/api/products/1';
+// Update a product rating using PATCH
+// PATCH api/products/1
+function updateProductRating(id, rating, callback) {
+  var data = [{"op": "replace", "path": "/rating", "value": rating}];
+  var url = 'http://localhost:50813/api/products/' + id;
     let headers = new Headers({
       'Content-Type':'application/json; charset=utf-8;'
       ,'Accept':'*/*'
@@ -110,6 +116,7 @@ function addToCart(data, callback) {
     }
 }
 
+// Helper method to check the AJAX response
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
