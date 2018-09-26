@@ -32,7 +32,7 @@ function updateProductRating(query, callback) {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(query),
+      body: JSON.stringify(data),
     }).then(res => res.text())
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));
