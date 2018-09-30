@@ -3,53 +3,58 @@ import React from 'react';
 export default function ShoppingCart(props) {
 
   return (
-    <table className='ui selectable structured large table'>
-      <thead>
-        <tr>
-          <th colSpan='6'>
-            <h3>Shopping Cart</h3>
-          </th>
-        </tr>
-        <tr>
-          {/* <th className='eight wide'>Description</th> */}
-          <th className='center aligned'>Manufacturer</th>
-          <th className='center aligned'>Model</th>
-          <th className='center aligned'>Color</th>
-          <th className='center aligned'>Size</th>
-          <th className='center aligned'>Qty</th>
-          <th className='center aligned'>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          props.products.map((product, idx) => (
-            <tr
-              key={idx}
-              onClick={() => props.onProductClick(idx)}
+    <div>
+      <table className='ui selectable structured large table'>
+        <thead>
+          <tr>
+            <th colSpan='6'>
+              <h3>Shopping Cart</h3>
+            </th>
+          </tr>
+          <tr>
+            {/* <th className='eight wide'>Description</th> */}
+            <th className='center aligned'>Manufacturer</th>
+            <th className='center aligned'>Model</th>
+            <th className='center aligned'>Color</th>
+            <th className='center aligned'>Size</th>
+            <th className='center aligned'>Qty</th>
+            <th className='center aligned'>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            props.products.map((product, idx) => (
+              <tr
+                key={idx}
+                onClick={() => props.onProductClick(idx)}
+              >
+                {/* <td>{food.description}</td> */}
+                <td className='center aligned'>{product.manufacturer}</td>
+                <td className='center aligned'>{product.model}</td>
+                <td className='center aligned'>{product.color}</td>
+                <td className='center aligned'>{product.size}</td>
+                <td className='center aligned'>{getQuantity(props.products, 'inventoryQuantity')}</td>
+                <td className='center aligned'>${product.price}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colSpan="5">Total</th>
+            <th
+              className='center aligned'
+              id='price'
             >
-              {/* <td>{food.description}</td> */}
-              <td className='center aligned'>{product.manufacturer}</td>
-              <td className='center aligned'>{product.model}</td>
-              <td className='center aligned'>{product.color}</td>
-              <td className='center aligned'>{product.size}</td>
-              <td className='center aligned'>{getQuantity(props.products, 'inventoryQuantity')}</td>
-              <td className='center aligned'>${product.price}</td>
-            </tr>
-          ))
-        }
-      </tbody>
-      <tfoot>
-        <tr>
-          <th colSpan="5">Total</th>
-          <th
-            className='center aligned'
-            id='price'
-          >
-            ${sumProducts(props.products, 'price')}
-          </th>
-        </tr>
-      </tfoot>
-    </table>
+              ${sumProducts(props.products, 'price')}
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+      <div>
+        <button className="btn btn-md btn-success">Checkout</button>
+      </div>
+    </div>
   );
 }
 

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'auth0-js';
 import registerServiceWorker from './registerServiceWorker';
 
 import { BrowserRouter } from 'react-router-dom';

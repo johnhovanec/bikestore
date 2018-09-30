@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Header from './pages/Header';
 import Home from './pages/Home';
 import About from './pages/About';
+import Checkout from './pages/Checkout';
 import Client from './Client'
 import history from './history';
 import uuid from 'uuid';
@@ -39,6 +40,7 @@ const App = () => (
       <Route exact path="/products" component={ProductsContainer} />
       <Route exact path="/products/:id" component={ProductDetail} />
       <Route exact path="/cart" component={ShoppingCart} />
+      <Route exact path="/checkout" component={Checkout} />
       <Route exact path="/login" component={Login} />
     </div>
   </Router>
