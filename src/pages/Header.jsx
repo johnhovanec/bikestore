@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import Products from './Products';
 import logo from '../logo.svg';
-import createHistory from "history/createBrowserHistory"
+import createHistory from "history/createBrowserHistory";
+import { FaShoppingCart } from 'react-icons/fa';
 
 const history = createHistory();
 
-class Header extends Component {
+class Header extends React.Component {
 
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ class Header extends Component {
         {path: "/About", text: "About", isActive: false},
         {path: "/Products", text: "Bikes", isActive: false},
         {path: "/Cart", text: "Cart", isActive: false},
-        {path: "/Login", text: "login", isActive: false},
+        {path: "/Login", text: "login", className:"nav-align-right", isActive: false},
         {path: "/Checkout", text: "Checkout", isActive: false},
         // {path: "/posttest", text: "post", isActive: false},
         // {path: "/cart", text: "Add To Cart", isActive: false},
@@ -43,24 +44,39 @@ class Header extends Component {
   render() {
     return (
       <div>
+        <h5>User logged in?: {this.props.userLoggedIn}</h5>
         <HeaderGraphic />
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
-          {/*<Link className="navbar-brand" to="/">Home</Link>*/}
-          <ul className="navbar-nav">
-            {this.state.links.map((link, item) =>
-              <NavLink
-                path={link.path}
-                text={link.text}
-                isActive={link.isActive}
-                key={link.path}
-                onClick={() => this.handleClick(item)}
-              />
-              )}
-          </ul>
-          {/*<form className="form-inline my-2 my-lg-0" onSubmit={this.onSearchSubmit}>
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success my-2 my-sm-0">Search</button>
-          </form>*/}
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul className="navbar-nav">
+                  {this.state.links.map((link, item) =>
+                    <NavLink
+                      path={link.path}
+                      text={link.text}
+                      isActive={link.isActive}
+                      key={link.path}
+                      onClick={() => this.handleClick(item)}
+                    />
+                    )}
+                </ul>
+            </div>
+            <div className="mx-auto order-0">
+                <a className="navbar-brand mx-auto" href="#">The Bike Store</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                      
+                        <a className="nav-link" href="#">Login</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">Shopping Cart <FaShoppingCart /></a>
+                    </li>
+                </ul>
+            </div>
         </nav>
       </div>
     );

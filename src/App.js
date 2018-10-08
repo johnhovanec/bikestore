@@ -29,23 +29,56 @@ let date = new Date();
 let custId = Math.round(date.getTime() / 1000);
 Client.setCookie("customerId", custId, 1);
 
-const App = () => (
-  <Router history={history}>
-    <div>
-      <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
-      <Header />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/Home" component={Home} />
-      <Route exact path="/About" component={About} />
-      <Route exact path="/products" component={ProductsContainer} />
-      <Route exact path="/products/:id" component={ProductDetail} />
-      <Route exact path="/cart" component={ShoppingCart} />
-      <Route exact path="/checkout" component={Checkout} />
-      <Route exact path="/login" component={Login} />
-    </div>
-  </Router>
-)
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: "false"
+    };
+  }
 
+  handleLogin(event) {
+    this.setState({ loggedIn: true });
+    console.log("handleLogin from App.js" + this.state.loggedIn);
+    event.preventDefault();
+  };
+
+  render() {
+    return (
+      <Router history={history}>
+        <div>
+          <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
+          <Header userLoggedIn={this.state.loggedIn}/>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Home" component={Home} />
+          <Route exact path="/About" component={About} />
+          <Route exact path="/products" component={ProductsContainer} />
+          <Route exact path="/products/:id" component={ProductDetail} />
+          <Route exact path="/cart" component={ShoppingCart} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route
+            path="/login"
+            render={(props) => <Login {...props} userLoggedIn={this.state.loggedIn}
+                                                 handleLogin={this.handleLogin.bind(this)/>}
+          />
+        </div>
+      </Router>
+    )
+  }
+}
+
+
+const fakeAuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    this.isAuthenticated = true;
+    setTimeout(cb, 100); // fake async
+  },
+  signout(cb) {
+    this.isAuthenticated = false;
+    setTimeout(cb, 100);
+  }
+};
 export default App;
 
 

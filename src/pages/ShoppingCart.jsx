@@ -3,74 +3,62 @@ import React from 'react';
 export default function ShoppingCart(props) {
 
   return (
-    <div>
-      <table className='ui selectable structured large table'>
-        <thead>
-          <tr>
-            <th colSpan='6'>
-              <h3>Shopping Cart</h3>
-            </th>
-          </tr>
-          <tr>
-            {/* <th className='eight wide'>Description</th> */}
-            <th className='center aligned'>Manufacturer</th>
-            <th className='center aligned'>Model</th>
-            <th className='center aligned'>Color</th>
-            <th className='center aligned'>Size</th>
-            <th className='center aligned'>Qty</th>
-            <th className='center aligned'>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            props.products.map((product, idx) => (
-              <tr
-                key={idx}
-                onClick={() => props.onProductClick(idx)}
+    <div className="container text-center">
+      <div className="row">
+        <table className='ui selectable structured large table'>
+          <thead>
+            <tr>
+              <th colSpan='6'>
+                <h3>Shopping Cart</h3>
+              </th>
+            </tr>
+            <tr>
+              {/* <th className='eight wide'>Description</th> */}
+              <th className='center aligned'>Manufacturer</th>
+              <th className='center aligned'>Model</th>
+              <th className='center aligned'>Color</th>
+              <th className='center aligned'>Size</th>
+              <th className='center aligned'>Qty</th>
+              <th className='center aligned'>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               <td className='center aligned'>Raliegh</td>
+               <td className='center aligned'>Sport200</td>
+               <td className='center aligned'>blue</td>
+               <td className='center aligned'>L</td>
+               <td className='center aligned'>2</td>
+               <td className='center aligned'>$354.12</td>
+            </tr>
+            <tr>
+               <td className='center aligned'>Schwin</td>
+               <td className='center aligned'>Gogo</td>
+               <td className='center aligned'>blue</td>
+               <td className='center aligned'>L</td>
+               <td className='center aligned'>2</td>
+               <td className='center aligned'>$144.12</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colSpan="5">Total</th>
+              <th
+                className='center aligned'
+                id='price'
               >
-                {/* <td>{food.description}</td> */}
-                <td className='center aligned'>{product.manufacturer}</td>
-                <td className='center aligned'>{product.model}</td>
-                <td className='center aligned'>{product.color}</td>
-                <td className='center aligned'>{product.size}</td>
-                <td className='center aligned'>{getQuantity(props.products, 'inventoryQuantity')}</td>
-                <td className='center aligned'>${product.price}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colSpan="5">Total</th>
-            <th
-              className='center aligned'
-              id='price'
-            >
-              ${sumProducts(props.products, 'price')}
-            </th>
-          </tr>
-        </tfoot>
-      </table>
-      <div>
-        <button className="btn btn-md btn-success">Checkout</button>
-      </div>
+                $777.66
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+        <div className="container text-right">
+          <button className="btn btn-md btn-success">Checkout</button>
+        </div>
     </div>
+  </div>
   );
 }
 
-// helper function
-function sumProducts(products, prop) {
-  return products.reduce((memo, product) => (
-    parseFloat(product[prop], 10) + memo
-  ), 0.0).toFixed(2);
-}
+// helper functions
 
-function getQuantity(products, prop) {
-  let qtyInCart = 0;
-  var qtyAvailable = products.reduce((memo, product) => (
-    parseInt(product[prop], 10) + memo
-  ), 0.0);
-
-  if (qtyInCart <= qtyAvailable)
-    return qtyInCart + 1;
-}
