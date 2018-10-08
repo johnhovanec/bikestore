@@ -19,29 +19,33 @@ import uuid from 'uuid';
 import './App.css';
 
 // Create a unique sessionId for the session to expire in 1 day
-const uuidv1 = require('uuid/v1');
-const sessionId = uuidv1();
-console.log("sessionId: " + sessionId);
-Client.setCookie("sessionId", sessionId, 1);
+// const uuidv1 = require('uuid/v1');
+// const sessionId = uuidv1();
+// console.log("sessionId: " + sessionId);
+// Client.setCookie("sessionId", sessionId, 1);
 
 // to generate faux customerIds
-let date = new Date();
-let custId = Math.round(date.getTime() / 1000);
-Client.setCookie("customerId", custId, 1);
+// let date = new Date();
+// let custId = Math.round(date.getTime() / 1000);
+// Client.setCookie("customerId", custId, 1);
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: "false"
+        loggedIn: false,
     };
   }
 
-  handleLogin(event) {
-    this.setState({ loggedIn: true });
-    console.log("handleLogin from App.js" + this.state.loggedIn);
-    event.preventDefault();
+  handleLogin() {
+    this.setState({
+         loggedIn: true
+      },() => { 
+      // setState is asynchronous, the following is executed after the callback returns
+       console.log("handleLogin from App.js", this.state.loggedIn);
+   });
   };
+
 
   render() {
     return (
@@ -58,9 +62,9 @@ class App extends React.Component {
           <Route exact path="/checkout" component={Checkout} />
           <Route
             path="/login"
-            render={(props) => <Login {...props} userLoggedIn={this.state.loggedIn}
-                                                 handleLogin={this.handleLogin.bind(this)/>}
+            render={(props) => <Login {...props} handleLogin={this.handleLogin.bind(this)} />}
           />
+          {/*<Route path="/login" render={props => <Login handleLogin = {this.handleLogin} />} />*/}
         </div>
       </Router>
     )
