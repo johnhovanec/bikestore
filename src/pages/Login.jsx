@@ -1,10 +1,6 @@
 import React from 'react';
-//import Auth from './../Auth';
-
-
-// const auth = new Auth();
-// auth.login();
-
+import Client from './../Client';
+import history from './../history';
 
 class Login extends React.Component {
   constructor(props) {
@@ -14,12 +10,13 @@ class Login extends React.Component {
   logIn() {
     console.log("In logIn...");
   }
+
   
   render() {
   return (
     <div className="container text-center">
       <div className="row d-flex justify-content-between">
-       <form className="form-signin col-lg-4" onSubmit={this.props.handleLogin.bind(this)}>
+       <form className="form-signin col-lg-4" onSubmit={this.handleLogin}>
           <img className="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
           <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
@@ -34,11 +31,5 @@ class Login extends React.Component {
   }
 }
 export default Login;
-// // helper function
-// function sumProducts(products, prop) {
-//   return products.reduce((memo, product) => (
-//     parseFloat(product[prop], 10) + memo
-//   ), 0.0).toFixed(2);
-// }
 
 

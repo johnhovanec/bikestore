@@ -162,5 +162,6 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
+
 const Client = { search, getProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie };
 export default Client;

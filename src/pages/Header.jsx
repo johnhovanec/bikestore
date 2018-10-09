@@ -69,11 +69,18 @@ class Header extends React.Component {
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                      
-                        <a className="nav-link" href="#">Login</a>
+                      if(Client.getCookie("custToken"))
+                      {
+
+                        <a className="nav-link" href="#">Logout</a>
+                      }
+                      else
+                      {
+                         <a className="nav-link" href="#">Login</a>
+                      }
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Shopping Cart <FaShoppingCart /></a>
+                      <a className="nav-link" link="/Cart" href="/Cart">Shopping Cart <FaShoppingCart /></a>
                     </li>
                 </ul>
             </div>

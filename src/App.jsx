@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import ProductsPage from './ProductsPage';
 import ProductSearch from './pages/ProductSearch';
 import ProductsContainer from './pages/ProductsContainer';
@@ -10,6 +10,7 @@ import Header from './pages/Header';
 import Home from './pages/Home';
 import About from './pages/About';
 import Checkout from './pages/Checkout';
+import Account from './pages/Account';
 import Client from './Client'
 import history from './history';
 import uuid from 'uuid';
@@ -35,15 +36,20 @@ class App extends React.Component {
     this.state = {
         loggedIn: false,
     };
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin() {
+  handleLogin(event) {
     this.setState({
          loggedIn: true
       },() => { 
       // setState is asynchronous, the following is executed after the callback returns
        console.log("handleLogin from App.js", this.state.loggedIn);
    });
+  };
+
+  loggedIn() {
+    return this.state.loggedIn;
   };
 
 
@@ -72,17 +78,6 @@ class App extends React.Component {
 }
 
 
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false;
-    setTimeout(cb, 100);
-  }
-};
 export default App;
 
 
