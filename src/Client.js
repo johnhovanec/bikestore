@@ -155,13 +155,47 @@ function getCookie(name) {
         if (cookie.indexOf(targetCookie) === 0) 
           return cookie.substring(targetCookie.length, cookie.length);
     }
-    return "Error: unable to get cookie";
+    return false;
 }
 
 function deleteCookie(name) {   
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
+function login(username, password) {
+  console.log("Calling Client login with: " + username + " " + password);
+  // POST user credentials to API
+  var now  = new Date().toLocaleString();
+  data = {
+        "username": 12334,
+        "password": password,
+        "timestamp": now
+        };
+  return fetch(`http://localhost:50813/api/shoppingcartproducts/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
 
-const Client = { search, getProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie };
+  // Then set cookie with session Id
+  const custId = "0001001";
+  Client.setCookie("customerToken", custId, 1);
+
+  //Redirect to page before Login
+  window.history.go(-2);
+}
+
+function logout() {
+  console.log("Calling Client logout");
+  deleteCookie("customerToken");
+}
+
+
+const Client = { search, getProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, logout, login };
 export default Client;

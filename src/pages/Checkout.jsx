@@ -4,8 +4,8 @@ import history from './../history';
 
 export default function Checkout(props) {
 
-  console.log("In Checkout, cookie = ", Client.getCookie("custToken"));
-  if (Client.getCookie)
+  console.log("In Checkout, cookie = ", Client.getCookie("customerToken"));
+  if (!Client.getCookie("customerToken"))
   {
     history.push("/login");
     return null;

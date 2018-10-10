@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import Products from './Products';
+import Client from './../Client';
 import logo from '../logo.svg';
 import createHistory from "history/createBrowserHistory";
 import { FaShoppingCart } from 'react-icons/fa';
@@ -69,15 +70,12 @@ class Header extends React.Component {
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                      if(Client.getCookie("custToken"))
-                      {
-
-                        <a className="nav-link" href="#">Logout</a>
-                      }
-                      else
-                      {
+                    {
+                      (Client.getCookie("customerToken")) ? (
+                        <a href="#" className="nav-link" onClick={Client.logout}>Logout</a>
+                      ) :
                          <a className="nav-link" href="#">Login</a>
-                      }
+                    }
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" link="/Cart" href="/Cart">Shopping Cart <FaShoppingCart /></a>
