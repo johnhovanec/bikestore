@@ -165,13 +165,19 @@ function deleteCookie(name) {
 function login(username, password) {
   console.log("Calling Client login with: " + username + " " + password);
   // POST user credentials to API
-  var now  = new Date().toLocaleString();
-  data = {
-        "username": 12334,
-        "password": password,
-        "timestamp": now
+  //Create a unique sessionId for the session
+  const uuidv1 = require('uuid/v1');
+  const sessionId = uuidv1();
+  Client.setCookie("sessionId", sessionId, 30);
+  
+  const now  = new Date().toLocaleString();
+  let data = {
+        "Username": username,
+        "Password": password,
+        "SessionId": sessionId,
+        "Timestamp": now
         };
-  return fetch(`http://localhost:50813/api/shoppingcartproducts/`, {
+  return fetch(`http://localhost:50813/api/sessions/`, {
         method: 'POST',
         mode: 'cors',
         headers:{

@@ -23,7 +23,7 @@ class Login extends React.Component {
   submitHandler(event) {
     event.preventDefault()
     // do some sort of verification here
-    Client.login("{this.state.username}","{this.state.password}");
+    Client.login(`${this.state.username}`,`${this.state.password}`);
     {/*this.props.push(`${this.state.where}/${this.state.what}`)*/}
   }
 
@@ -36,13 +36,13 @@ class Login extends React.Component {
           <img className="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
           <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
-            <input type="email" 
+            <input type="text" 
                    id="inputUsername" 
                    name="username" 
                    defaultValue={this.state.username} 
                    onChange={this.handleInput} 
                    className="form-control" 
-                   placeholder="Email address" 
+                   placeholder="User name" 
                    required autoFocus></input>
           <label htmlFor="inputPassword" className="sr-only">Password</label>
             <input type="password" 
