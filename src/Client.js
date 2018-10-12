@@ -168,8 +168,6 @@ function login(username, password) {
   //Create a unique sessionId for the session
   const uuidv1 = require('uuid/v1');
   const sessionId = uuidv1();
-  Client.setCookie("sessionId", sessionId, 30);
-  
   const now  = new Date().toLocaleString();
   let data = {
         "Username": username,
@@ -186,15 +184,30 @@ function login(username, password) {
         },
         body: JSON.stringify(data)
       }).then(res => res.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));
+      .catch(error => handleLoginError(error))
+      .then(response => handleLoginSuccess(response));
+}
 
-  // Then set cookie with session Id
-  const custId = "0001001";
-  Client.setCookie("customerToken", custId, 1);
+function handleLoginSuccess(response) {
+  // An undefined reponse implies credentials failed
+  if (!response) {
+    console.log('handleLoginResponse user credentials not valid', response);
+    // Then set a flash message
+    window.alert("Your credentials were not successful, please try again.");
+    return;
+  }
 
+  console.log('handleLoginResponse Success:', response);
+  // Then set customerToken cookie with sessionId created by uuid and also recorded in the Session table
+  Client.setCookie("customerToken", response.sessionId, 1);
   //Redirect to page before Login
   window.history.go(-2);
+}
+
+function handleLoginError(error) {
+  console.error('handleLoginError Error:', error);
+  // Then set a flash message
+  window.alert("There was an error logging in, please try again.");
 }
 
 function logout() {
