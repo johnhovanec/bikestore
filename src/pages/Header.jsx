@@ -71,7 +71,7 @@ class Header extends React.Component {
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                     {
-                      (Client.getCookie("customerToken")) ? (
+                      (Client.getCookie("customerToken")) || (Client.getCookie("adminToken")) ? (
                         <a href="#" className="nav-link" onClick={Client.logout}>Logout</a>
                       ) :
                          <a className="nav-link" href="#">Login</a>

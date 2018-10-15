@@ -191,17 +191,37 @@ function login(username, password) {
 function handleLoginSuccess(response) {
   // An undefined reponse implies credentials failed
   if (!response) {
-    console.log('handleLoginResponse user credentials not valid', response);
     // Then set a flash message
     window.alert("Your credentials were not successful, please try again.");
     return;
   }
+  else {
+    console.log('handleLoginResponse Success:', response);
 
-  console.log('handleLoginResponse Success:', response);
-  // Then set customerToken cookie with sessionId created by uuid and also recorded in the Session table
-  Client.setCookie("customerToken", response.sessionId, 1);
-  //Redirect to page before Login
-  window.history.go(-2);
+    switch (response.userSessionType) {
+      // Customer user
+      case 1:
+        // Then set customerToken cookie with sessionId created by uuid and also recorded in the Session table
+        Client.setCookie("customerToken", response.sessionId, 1);
+        //Redirect to page before Login
+        window.history.go(-2);
+        break;
+      // Reports user
+      case 2:
+        Client.setCookie("reportsToken", "R_-" + response.sessionId);
+        //Redirect to page before Login
+        window.history.go(-2);
+        break;
+      // Admin user
+      case 3:
+        Client.setCookie("adminToken", "A_-" + response.sessionId);
+        //Redirect to page before Login
+        window.history.go(-2);
+        break;
+      default:
+        console.log("There was an error determining the user session type");
+    }
+  }
 }
 
 function handleLoginError(error) {
@@ -213,6 +233,7 @@ function handleLoginError(error) {
 function logout() {
   console.log("Calling Client logout");
   deleteCookie("customerToken");
+  deleteCookie("adminToken");
 }
 
 
