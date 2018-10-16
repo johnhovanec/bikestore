@@ -96,7 +96,10 @@ class ProductSearch extends React.Component {
               <th scope="col">Size</th>
               <th scope="col">Price</th>
               <th scope="col">Details</th>
+              { !(Client.getCookie("adminToken")) ? (
               <th scope="col">Add To Cart</th>
+              ) : <th></th>
+              }
             </tr>
           </thead>
           <tbody>
@@ -129,7 +132,7 @@ class ProductSearch extends React.Component {
                 </td>
                 <td className='center aligned'>
                   {
-                    checkQuantity(product) ? (
+                    (checkQuantity(product) && !Client.getCookie("adminToken")) ? (
                       <a href="#" onClick={() => this.props.onProductClick(product)} >
                         <i
                           className='big shopping cart icon'
@@ -139,7 +142,7 @@ class ProductSearch extends React.Component {
                     <i
                     className='big remove icon red'
                   /> 
-                }
+                  }
 
                   {/* {
                     this.state.addToCartIcon ? (

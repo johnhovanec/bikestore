@@ -51,6 +51,7 @@ class ProductDetail extends React.Component {
   };
 
   render() {
+    if (!Client.getCookie("adminToken")) {
     return (
       <div id=''>
       	<p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
@@ -101,6 +102,72 @@ class ProductDetail extends React.Component {
         </table>
       </div>
     );
+    } else {
+      return (
+        <div className="container">
+          <form>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="inputEmail4">Id</label>
+                <input type="text" className="form-control" id="inputEmail4" placeholder={this.state.product.id} />
+
+                <label htmlFor="inputEmail4">Model</label>
+                <input type="text" className="form-control" id="inputEmail4" placeholder={this.state.product.model} />
+
+                <label htmlFor="inputAddress">Color</label>
+                <input type="text" className="form-control" id="inputAddress" placeholder={this.state.product.color} />
+
+                <label htmlFor="inputAddress">Home Page Position</label>
+                <input type="number" className="form-control" id="inputAddress" step="1" min="0" max="9"
+                  placeholder={this.state.product.homePagePosition ? this.state.product.homePagePosition : "0: Not selected for home page"} />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="inputPassword4">Manufacturer</label>
+                <input type="text" className="form-control" id="inputPassword4" placeholder={this.state.product.manufacturer} />
+
+                <label htmlFor="inputPassword4">Name</label>
+                <input type="text" className="form-control" id="inputPassword4" placeholder={this.state.product.name} />
+
+                <label htmlFor="inputPassword4">Price</label>
+                <input type="text" className="form-control" id="inputPassword4" placeholder={this.state.product.price} />
+
+                <label htmlFor="inputPassword4">Inventory Quantity</label>
+                <input type="text" className="form-control" id="inputPassword4" placeholder={this.state.product.inventoryQuantity} />
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="inputAddress">Image Path</label>
+              <input type="text" className="form-control" id="inputAddress" placeholder={this.state.product.imagePath} />
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <label htmlFor="inputState">Type</label>
+                <select id="inputState" className="form-control">
+                  <option selected>{this.state.product.type}</option>
+                  <option>Mountain</option>
+                  <option>Road</option>
+                  <option>Hybrid</option>
+                </select>
+              </div>
+              <div className="form-group col-md-2">
+                <label htmlFor="inputState">Size</label>
+                <select id="inputState" className="form-control">
+                  <option selected>{this.state.product.size}</option>
+                  <option>S</option>
+                  <option>M</option>
+                  <option>L</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
+              <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder={this.state.product.description}></textarea>
+            </div>
+               <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 
