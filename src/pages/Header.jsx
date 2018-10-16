@@ -83,6 +83,12 @@ class Header extends React.Component {
                 </ul>
             </div>
         </nav>
+        {/* Display a banner if the user is functioning as an admin */}
+        { (Client.getCookie("adminToken")) ? (
+          <div class="alert alert-warning text-center" role="alert">
+            <strong>Warning!</strong> You are currently logged-in as an Administrator.
+          </div> ) : <div></div>
+        }
       </div>
     );
   }
