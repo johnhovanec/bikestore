@@ -44,6 +44,29 @@ function updateProductRating(id, rating, callback) {
     .then(response => console.log('Success:', response));
 }
 
+// Update a product -- Admin only
+// PUT api/products/1
+function updateProduct(id, data, callback) {
+  //var data = [{"op": "replace", "path": "/rating", "value": rating}];
+  var url = 'http://localhost:50813/api/products/' + id;
+    let headers = new Headers({
+      'Content-Type':'application/json; charset=utf-8;'
+      ,'Accept':'*/*'
+    });
+
+    fetch(url, {
+      method: 'PUT',
+      mode: 'cors',
+      headers:{
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    }).then(res => res.text())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+}
+
 
 function getCartDetail(query, callback) {
   return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
@@ -237,5 +260,5 @@ function logout() {
 }
 
 
-const Client = { search, getProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, logout, login };
+const Client = { search, getProduct, updateProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, logout, login };
 export default Client;
