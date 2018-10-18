@@ -47,24 +47,23 @@ function updateProductRating(id, rating, callback) {
 // Update a product -- Admin only
 // PUT api/products/1
 function updateProduct(id, data, callback) {
-  //var data = [{"op": "replace", "path": "/rating", "value": rating}];
   var url = 'http://localhost:50813/api/products/' + id;
-    let headers = new Headers({
-      'Content-Type':'application/json; charset=utf-8;'
-      ,'Accept':'*/*'
-    });
+  let headers = new Headers({
+    'Content-Type':'application/json; charset=utf-8;'
+    ,'Accept':'*/*'
+  });
 
-    fetch(url, {
-      method: 'PUT',
-      mode: 'cors',
-      headers:{
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    }).then(res => res.text())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+  fetch(url, {
+    method: 'PUT',
+    mode: 'cors',
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  }).then(res => res.text())
+  .catch(error => console.error('Error:', error))
+  .then(response => console.log('Success:', response));
 }
 
 
@@ -185,6 +184,13 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
+// Currency formatting helper
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+});
+
 function login(username, password) {
   console.log("Calling Client login with: " + username + " " + password);
   // POST user credentials to API
@@ -260,5 +266,5 @@ function logout() {
 }
 
 
-const Client = { search, getProduct, updateProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, logout, login };
+const Client = { search, getProduct, updateProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, formatter, logout, login };
 export default Client;
