@@ -9,10 +9,6 @@ body {
   margin-top: 5em;
 }
 
-#food-search {
-  margin-top: 5em;
-}
-
 .products-container {
   display: block;
   float: left;
@@ -23,4 +19,8 @@ body {
   display: block;
   float: right;
   margin: 0 50px;
+}
+
+#productDelete {
+  margin: 0 25px;
 }

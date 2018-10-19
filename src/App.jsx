@@ -57,7 +57,6 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div>
-          <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
           <Header userLoggedIn={this.state.loggedIn}/>
           <Route exact path="/" component={Home} />
           <Route exact path="/Home" component={Home} />

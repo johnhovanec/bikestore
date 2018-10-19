@@ -2,6 +2,7 @@ import React from 'react';
 import Client from './../Client';
 import { FaThumbsUp } from 'react-icons/fa';
 import { FaChevronCircleUp } from 'react-icons/fa';
+import history from './../history';
 
 
 class ProductDetail extends React.Component {
@@ -26,7 +27,6 @@ class ProductDetail extends React.Component {
 		    addToCartIcon: '',
 		};
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -77,10 +77,6 @@ class ProductDetail extends React.Component {
 	 });
   };
 
-  handleChange(event) {
-    this.setState({imagePath: event.target.value});
-  }
-
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -111,6 +107,14 @@ class ProductDetail extends React.Component {
     event.preventDefault();
     Client.updateProduct(this.props.match.params.id, data)
   };
+
+  handleDelete(event) {
+    console.log("Calling handleDelete on id: ", this.props.match.params.id);
+    window.alert("Caution: You are about to delete a product!");
+    Client.deleteProduct(this.props.match.params.id);
+    history.push("/products");
+    window.location.reload(true);
+  }
 
   render() {
     // Regular user or Customer
@@ -200,16 +204,23 @@ class ProductDetail extends React.Component {
                   onChange={this.handleInputChange}
                 />
                 <label htmlFor="inputHomePagePosition">Home Page Position</label>
-                <input 
-                  type="number" 
-                  className="form-control" 
-                  id="inputHomePagePosition" 
-                  step="1" 
-                  min="0" 
-                  max="9"
-                  value={this.state.homePagePosition === "0" ?  "0: Not selected for home page" : this.state.homePagePosition} 
-                  onChange={this.handleInputChange} 
-                />
+                <select 
+                  id="homePageIndex" 
+                  className="form-control"
+                  name="homePageIndex"
+                  value={this.state.homePageIndex ? this.state.homePageIndex : "0"}
+                  onChange={this.handleInputChange}>
+                  <option value="Not Selected">Not Selected</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="inputManufacturer">Manufacturer</label>
@@ -258,7 +269,7 @@ class ProductDetail extends React.Component {
                 className="form-control" 
                 id="inputImagePath" 
                 name="imagePath" 
-                value={this.state.imagePath} 
+                value={this.state.imagePath ? this.state.imagePath : ''} 
                 onChange={this.handleInputChange} 
               />
             </div>
@@ -301,8 +312,8 @@ class ProductDetail extends React.Component {
                 onChange={this.handleInputChange} >
               </textarea>
             </div>
-               <button type="submit" className="btn btn-primary">Update</button>
-               <button type="" className="btn btn-primary btn-warning">Delete</button>
+               <button type="submit" id="productUpdate" className="btn btn-primary">Update</button>
+               <button type="button" id="productDelete" className="btn btn-primary btn-warning" onClick={(e) => this.handleDelete(e)}>Delete</button>
           </form>
         </div>
       );

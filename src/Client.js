@@ -66,6 +66,34 @@ function updateProduct(id, data, callback) {
   .then(response => console.log('Success:', response));
 }
 
+// Delete a product -- Admin only
+// DELETE api/products/1
+function deleteProduct(id, callback) {
+  var url = 'http://localhost:50813/api/products/' + id;
+  let headers = new Headers({
+    'Content-Type':'application/json; charset=utf-8;'
+    ,'Accept':'*/*'
+  });
+
+  fetch(url, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  }).then(res => res.text())
+  .catch(error => console.error('Error:', error))
+  .then(response => handleProductDeleteSuccess(response));
+}
+
+function handleProductDeleteSuccess(response) {
+  if (!response) 
+    window.alert("There was an error deleting the product");
+  else {
+    window.alert("Product was successfully deleted.");
+  }
+}
 
 function getCartDetail(query, callback) {
   return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
@@ -243,7 +271,7 @@ function handleLoginSuccess(response) {
         break;
       // Admin user
       case 3:
-        Client.setCookie("adminToken", "A_-" + response.sessionId);
+        Client.setCookie("adminToken", "A_-" + response.sessionId, 1);
         //Redirect to page before Login
         window.history.go(-2);
         break;
@@ -265,6 +293,19 @@ function logout() {
   deleteCookie("adminToken");
 }
 
+const Client = { 
+  search, 
+  getProduct, 
+  updateProduct, 
+  deleteProduct, 
+  updateProductRating, 
+  addToCart, 
+  setCookie, 
+  getCookie, 
+  deleteCookie, 
+  formatter, 
+  logout, 
+  login 
+};
 
-const Client = { search, getProduct, updateProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, formatter, logout, login };
 export default Client;
