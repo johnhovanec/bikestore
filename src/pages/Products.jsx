@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from './../Client';
+import history from './../history';
 
 const MAX_NUMBER_OF_PRODUCTS = 15;
 
@@ -18,6 +19,10 @@ class ProductSearch extends React.Component {
         products: products.slice(0, MAX_NUMBER_OF_PRODUCTS),
       });
     });
+  }
+
+  handleProductAdd() {
+    history.push('/ProductAdd');
   }
 
   onSearchChange = (evt) => {
@@ -66,10 +71,10 @@ class ProductSearch extends React.Component {
           <thead>
             <tr>
               <th scope="col" colSpan='8'>
-                <div className='ui fluid search'>
-                  <div className='ui icon input'>
+                <div className='form-row'>
+                  <div className='input-group col-md-6'>
                     <input
-                      className='prompt'
+                      className='form-control'
                       type='text'
                       placeholder='Search products ...'
                       value={this.state.searchValue}
@@ -85,6 +90,18 @@ class ProductSearch extends React.Component {
                       />
                     ) : ''
                   }
+                  {
+                    (Client.getCookie("adminToken")) ? (
+                      <button 
+                        type="button" 
+                        id="productAdd" 
+                        className="btn btn-primary btn-success align-right" 
+                        onClick={this.handleProductAdd}>Add Product 
+                      </button>
+                    ) : <p></p>
+                  }
+                  
+                  
                 </div>
               </th>
             </tr>

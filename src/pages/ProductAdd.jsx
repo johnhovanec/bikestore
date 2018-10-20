@@ -1,11 +1,9 @@
 import React from 'react';
 import Client from './../Client';
-import { FaThumbsUp } from 'react-icons/fa';
-import { FaChevronCircleUp } from 'react-icons/fa';
 import history from './../history';
 
 
-class ProductDetail extends React.Component {
+class ProductAdd extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,53 +27,15 @@ class ProductDetail extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
 	}
-  
+
   componentDidMount() {
-    console.log("Product Detail Component mounted and now calling populate for id: " + this.props.match.params.id);
-    Client.getProduct(this.props.match.params.id, (product) => {
-      this.setState({
-        product: product,
-        id: product.id,
-        name: product.name, 
-        manufacturer: product.manufacturer,
-        model: product.model,
-        type: product.type, 
-        size: product.size, 
-        color: product.color, 
-        description: product.description, 
-        rating: product.rating, 
-        price: product.price,
-        inventoryQuantity: product.inventoryQuantity, 
-        imagePath: product.imagePath,
-        homePageIndex: product.homePageIndex,
-      });
-    });
+    if (!Client.getCookie("adminToken")) {
+      console.log("Unauthorized page visit without adminToken");
+      history.push("/");
+    }
   }
-
-  componentDidUpdate(){
-  	console.log("Detail updating");
-  }
-
-  incrementRating() {
-  	this.setState({
-	       rating: parseInt(this.state.rating) + 1
-	    },() => { 
-	    // setState is asynchronous, the following is executed after the callback returns
-	     console.log("++ updating inc rating:", this.state.rating) 
-	     Client.updateProductRating(this.props.match.params.id, this.state.rating);
-	 });
-  };
-
-  decrementRating() {
-  	this.setState({
-	       rating: parseInt(this.state.rating) - 1
-	    },() => { 
-	    // setState is asynchronous, the following is executed after the callback returns
-	     console.log("-- updating dec rating:", this.state.rating) 
-	     Client.updateProductRating(this.props.match.params.id, this.state.rating);
-	 });
-  };
 
   handleInputChange(event) {
     const target = event.target;
@@ -90,7 +50,6 @@ class ProductDetail extends React.Component {
   handleSubmit(event) {
     console.log("Form was submitted for Id: " + this.state.id);
     var data = {
-      "id": this.state.id, 
       "name": this.state.name, 
       "manufacturer": this.state.manufacturer,
       "model": this.state.model, 
@@ -105,86 +64,18 @@ class ProductDetail extends React.Component {
       "homePageIndex": this.state.homePageIndex,
     };
     event.preventDefault();
-    Client.updateProduct(this.props.match.params.id, data)
-  };
-
-  handleDelete(event) {
-    console.log("Calling handleDelete on id: ", this.props.match.params.id);
-    window.alert("Caution: You are about to delete a product!");
-    Client.deleteProduct(this.props.match.params.id);
+    Client.addProduct(data)
     history.push("/products");
     window.location.reload(true);
-  }
+  };
 
   render() {
-    // Regular user or Customer
-    if (!Client.getCookie("adminToken")) {
-    return (
-      <div id=''>
-      	<p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
-        <table className='ui selectable structured large table'>
-          <thead>
-            <tr>
-              <th colSpan='8'>
-              </th>
-            </tr>
-            <tr>
-              <th className='eight wide'>Description</th>
-              <th>Model</th>
-              <th>Manufacturer</th>
-              <th>Color</th>
-              <th>Size</th>
-              <th>Price</th>
-              <th><FaThumbsUp /></th>
-              <th>Add To Cart</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-	          <tr>
-	            <td>{this.state.product.description}</td>
-	            <td className='right aligned'>
-	              {this.state.product.model}
-	            </td>
-	            <td className='right aligned'>
-	              {this.state.product.manufacturer}
-	            </td>
-	            <td className='right aligned'>
-	              {this.state.product.color}
-	            </td>
-	            <td className='right aligned'>
-	              {this.state.product.size}
-	            </td>
-	            <td className='right aligned'>
-	              {this.state.product.price}
-	            </td>
-	            <td className='right aligned'>
-	              <button onClick={(e) => this.decrementRating(e)}> - </button>
-	              {this.state.rating} 
-	              <button onClick={(e) => this.incrementRating(e)}> + </button>
-	            </td>
-	          </tr>   
-          }
-          </tbody>
-        </table>
-      </div>
-    );
-    } 
-    // Admin user
-    else {
       return (
         <div className="container">
+          <h3>Add Product</h3>
           <form onSubmit={this.handleSubmit}>
             <div className="form-row">
               <div className="form-group col-md-6">
-                <label htmlFor="inputId">Id</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  id="inputId" 
-                  readOnly 
-                  value={this.state.id} 
-                />
                 <label htmlFor="inputModel">Model</label>
                 <input 
                   type="text" 
@@ -221,6 +112,16 @@ class ProductDetail extends React.Component {
                   <option value="8">8</option>
                   <option value="9">9</option>
                 </select>
+
+                <label htmlFor="inventoryQuantity">Inventory Quantity</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  id="inventoryQuantity" 
+                  name="inventoryQuantity" 
+                  value={this.state.inventoryQuantity} 
+                  onChange={this.handleInputChange}
+                />
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="inputManufacturer">Manufacturer</label>
@@ -249,16 +150,6 @@ class ProductDetail extends React.Component {
                   name="price" 
                   value={this.state.price}
                   onChange={this.handleInputChange} 
-                />
-
-                <label htmlFor="inventoryQuantity">Inventory Quantity</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  id="inventoryQuantity" 
-                  name="inventoryQuantity" 
-                  value={this.state.inventoryQuantity} 
-                  onChange={this.handleInputChange}
                 />
               </div>
             </div>
@@ -324,13 +215,12 @@ class ProductDetail extends React.Component {
                 onChange={this.handleInputChange} >
               </textarea>
             </div>
-               <button type="submit" id="productUpdate" className="btn btn-primary">Update</button>
-               <button type="button" id="productDelete" className="btn btn-primary btn-warning" onClick={(e) => this.handleDelete(e)}>Delete</button>
+            <button type="submit" id="addProduct" className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>Add Product</button>
           </form>
         </div>
       );
-    }
+    
   }
 }
 
-export default ProductDetail;
+export default ProductAdd;

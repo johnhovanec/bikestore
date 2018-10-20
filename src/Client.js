@@ -44,6 +44,28 @@ function updateProductRating(id, rating, callback) {
     .then(response => console.log('Success:', response));
 }
 
+// Add a product -- Admin only
+// Add api/products/
+function addProduct(data, callback) {
+  var url = 'http://localhost:50813/api/products/';
+  let headers = new Headers({
+    'Content-Type':'application/json; charset=utf-8;'
+    ,'Accept':'*/*'
+  });
+
+  fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  }).then(res => res.text())
+  .catch(error => console.error('Error:', error))
+  .then(response => console.log('Success:', response));
+}
+
 // Update a product -- Admin only
 // PUT api/products/1
 function updateProduct(id, data, callback) {
@@ -295,7 +317,8 @@ function logout() {
 
 const Client = { 
   search, 
-  getProduct, 
+  getProduct,
+  addProduct, 
   updateProduct, 
   deleteProduct, 
   updateProductRating, 
