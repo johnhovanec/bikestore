@@ -2,7 +2,7 @@ import React from 'react';
 import Client from './../Client';
 import history from './../history';
 
-const MAX_NUMBER_OF_PRODUCTS = 15;
+const MAX_NUMBER_OF_PRODUCTS = 20;
 
 class ProductSearch extends React.Component {
   state = {
@@ -76,6 +76,7 @@ class ProductSearch extends React.Component {
                     <input
                       className='form-control'
                       type='text'
+                      id='inputProductSearch'
                       placeholder='Search products ...'
                       value={this.state.searchValue}
                       onChange={this.onSearchChange}
@@ -92,16 +93,16 @@ class ProductSearch extends React.Component {
                   }
                   {
                     (Client.getCookie("adminToken")) ? (
-                      <button 
-                        type="button" 
-                        id="productAdd" 
-                        className="btn btn-primary btn-success align-right" 
-                        onClick={this.handleProductAdd}>Add Product 
-                      </button>
+                      <div className="">
+                        <button 
+                          type="button" 
+                          id="productAdd" 
+                          className="btn btn-primary btn-success align-right" 
+                          onClick={this.handleProductAdd}>Add Product 
+                        </button>
+                      </div>
                     ) : <p></p>
                   }
-                  
-                  
                 </div>
               </th>
             </tr>

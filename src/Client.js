@@ -62,8 +62,22 @@ function addProduct(data, callback) {
     },
     body: JSON.stringify(data),
   }).then(res => res.text())
-  .catch(error => console.error('Error:', error))
-  .then(response => console.log('Success:', response));
+  .catch(error => handleAddProductError(error))
+  .then(response => handleAddProductSuccess(response));
+}
+
+function handleAddProductSuccess(response) {
+  if (response) {
+    console.log("Product was successfully added: ", response);
+    window.alert("Product was successfully added.");
+  }
+}
+
+function handleAddProductError(response) {
+  if (response) {
+    console.log("Error adding product: ", response);
+    window.alert("Error adding product: ");
+  }
 }
 
 // Update a product -- Admin only
@@ -84,8 +98,25 @@ function updateProduct(id, data, callback) {
     },
     body: JSON.stringify(data),
   }).then(res => res.text())
-  .catch(error => console.error('Error:', error))
-  .then(response => console.log('Success:', response));
+  .catch(error => handleProductUpdateError(error))
+  .then(response => handleProductUpdateSuccess(response));
+}
+
+function handleProductUpdateError(response) {
+  if (response) {
+    console.log("Error updating product: ", response);
+    window.alert("Error updating product: ");
+  }
+}
+
+// Note: a successful put returns a 204 with No Content in the response
+function handleProductUpdateSuccess(response) {
+  if (!response) {
+    console.log("Updating product: ");
+    window.alert("Updating product");
+  }
+  else
+    window.alert("Error in updating product:", response);
 }
 
 // Delete a product -- Admin only
@@ -96,7 +127,6 @@ function deleteProduct(id, callback) {
     'Content-Type':'application/json; charset=utf-8;'
     ,'Accept':'*/*'
   });
-
   fetch(url, {
     method: 'DELETE',
     mode: 'cors',
@@ -104,19 +134,26 @@ function deleteProduct(id, callback) {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
     },
-  }).then(res => res.text())
-  .catch(error => console.error('Error:', error))
-  .then(response => handleProductDeleteSuccess(response));
+  }).then(response => response.json())
+  .catch(error => console.log('Error;', error))
+  .then(response => console.log('Success ', JSON.stringify(response)));
 }
 
 function handleProductDeleteSuccess(response) {
-  if (!response) 
-    window.alert("There was an error deleting the product");
-  else {
+  if (response) {
+    console.log("Deleting product: ", response);
     window.alert("Product was successfully deleted.");
   }
 }
 
+function handleProductDeleteError(response) {
+  if (response) {
+    window.alert("There was an error deleting the product");
+  }
+}
+
+
+////    Shopping cart     //// 
 function getCartDetail(query, callback) {
   return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
     method: "GET",

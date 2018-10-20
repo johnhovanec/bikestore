@@ -6,7 +6,7 @@ body {
 }
 
 .App {
-  margin-top: 5em;
+  margin-top: 2em;
 }
 
 .products-container {
@@ -23,4 +23,8 @@ body {
 
 #productDelete {
   margin: 0 25px;
+}
+
+#inputProductSearch {
+  margin: 0 50px 0 0;
 }

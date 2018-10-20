@@ -22,8 +22,8 @@ class ProductsContainer extends React.Component {
 
   render() {
     return (
-      <div className='App'>
-        <div className='shopping-cart-container'>
+      <div className='App row'>
+        <div className='shopping-cart-container col-lg-4 order-last'>
           <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
           <p><b>customerId:</b> {Client.getCookie("customerId")}</p>
           <ShoppingCart
@@ -42,7 +42,7 @@ class ProductsContainer extends React.Component {
               }
             />
         </div>
-        <div className='products-container'>
+        <div className='products-container col-lg-6'>
           <Products
             onProductClick={
               (product) => (
