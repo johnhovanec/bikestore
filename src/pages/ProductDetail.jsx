@@ -110,7 +110,7 @@ class ProductDetail extends React.Component {
 
   handleDelete(event) {
     console.log("Calling handleDelete on id: ", this.props.match.params.id);
-    window.alert("Caution: You are about to delete a product!");
+    //window.alert("Caution: You are about to delete a product!");
     Client.deleteProduct(this.props.match.params.id);
     history.push("/products");
     window.location.reload(true);
