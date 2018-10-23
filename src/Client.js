@@ -128,16 +128,9 @@ function handleProductUpdateSuccess(response) {
 //     method: 'DELETE',
 //     mode: 'cors',
 //     headers:{
-//       'Access-Control-Allow-Origin': '*'
+//       'Accept': 'application/json, text/plain, */*'
 //     },
 //   }).then(response => {
-//     // response from server
-//     // check status of response and handle it manually
-//     switch (response.status) {
-//       case 500: console.error('Some server error'); break;
-//       case 401: console.error('Unauthorized'); break;
-//       // ...
-//     }
 //     // check if status in the range 200 to 299
 //     if (response.ok) {
 //       return response;
@@ -150,61 +143,66 @@ function handleProductUpdateSuccess(response) {
 //     }
 //   })
 //   .catch(error => {
-//     // here you will get only Fetch API errors and those you threw or rejected above
-//     // in most cases Fetch API error will look like common Error object
-//     // {
-//     //   name: "TypeError",
-//     //   message: "Failed to fetch",
-//     //   stack: ...
-//     // }
+//     console.error("ERR: ", error);
 //   });
-//   //   }).then(res => res.json())
-//   // .catch(error => console.error(error))
-//   // .then(response => console.log(response));
 // }
 
-// function handleDeleteProductSuccess(response) {
-//   if (response) {
-//     console.log("Product was successfully deleted: ", response);
-//     window.alert("Product was successfully deleted.");
-//   }
-// }
-
-// function handleDeleteProductError(response) {
-//   if (response) {
-//     console.log("Error deleted product: ", response);
-//     window.alert("Error deleted product: ");
-//   }
-// }
-
-function deleteProduct(id){
-  // var xhr = new XMLHttpRequest();
-  // var url = 'http://localhost:50813/api/products/' + id;
-  // xhr.open('DELETE', url, true);
-  // xhr.send();
-  // xhr.addEventListener("readystatechange", handleDeleteProduct(xhr), false);
-
-  var xhr = new XMLHttpRequest(),
-      method = "DELETE",
-      url = 'http://localhost:50813/api/products/' + id;
-
-  xhr.open(method, url, true);
-  xhr.onreadystatechange = function () {
-    if(xhr.readyState === 4 && xhr.status === 200) {
-      console.log(">> Product deleted:" + " " + xhr.responseText);
-    }
-  };
-  xhr.send();
+function deleteProduct(id, callback) {
+  let url = 'http://localhost:50813/api/products/'+id;
+  fetch(url, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(id),
+  }).then(res => res.text())
+  .catch(error => handleDeleteProductError(error))
+  .then(response => handleDeleteProductSuccess(response));
 }
-
-function handleDeleteProduct(xhr) {
-  if (xhr.readyState) {
-    console.log("Product was successfully deleted: ", xhr);
-    window.alert("Product was successfully deleted.");
-    //var response = JSON.parse(xhr.responseText);
-    console.log("@@ ", xhr);
+function handleDeleteProductSuccess(response) {
+  if (response) {
+    console.log("Product was successfully deleted: ", response);
+    //window.alert("Product was successfully deleted.");
   }
 }
+
+function handleDeleteProductError(response) {
+  if (response) {
+    console.log("Error deleted product: ", response);
+    //window.alert("Error deleted product: ");
+  }
+}
+
+// function deleteProduct(id){
+//   // var xhr = new XMLHttpRequest();
+//   // var url = 'http://localhost:50813/api/products/' + id;
+//   // xhr.open('DELETE', url, true);
+//   // xhr.send();
+//   // xhr.addEventListener("readystatechange", handleDeleteProduct(xhr), false);
+
+//   var xhr = new XMLHttpRequest(),
+//       method = "DELETE",
+//       url = 'http://localhost:50813/api/products/' + id;
+
+//   xhr.open(method, url, true);
+//   xhr.onreadystatechange = function () {
+//     if(xhr.readyState === 4 && xhr.status === 200) {
+//       console.log(">> Product deleted:" + " " + xhr.responseText);
+//     }
+//   };
+//   xhr.send();
+// }
+
+// function handleDeleteProduct(xhr) {
+//   if (xhr.readyState) {
+//     console.log("Product was successfully deleted: ", xhr);
+//     window.alert("Product was successfully deleted.");
+//     //var response = JSON.parse(xhr.responseText);
+//     console.log("@@ ", xhr);
+//   }
+// }
 
 
 function getCartDetail(query, callback) {
