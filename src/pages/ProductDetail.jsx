@@ -217,8 +217,8 @@ class ProductDetail extends React.Component {
     // Admin user
     else {
       return (
-        <div className="row container">
-          <div className="col-lg-10">
+        <div className="d-flex justify-content-center">
+          <div className="col-lg-6">
           <form onSubmit={this.handleUpdateSubmit}>
             <div className="form-row">
               <div className="form-group col-md-6">
