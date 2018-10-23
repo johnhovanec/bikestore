@@ -1,7 +1,8 @@
 import React from 'react';
 import Client from './../Client';
+import history from './../history';
 
-const MAX_NUMBER_OF_PRODUCTS = 15;
+const MAX_NUMBER_OF_PRODUCTS = 20;
 
 class ProductSearch extends React.Component {
   state = {
@@ -18,6 +19,10 @@ class ProductSearch extends React.Component {
         products: products.slice(0, MAX_NUMBER_OF_PRODUCTS),
       });
     });
+  }
+
+  handleProductAdd() {
+    history.push('/ProductAdd');
   }
 
   onSearchChange = (evt) => {
@@ -66,11 +71,12 @@ class ProductSearch extends React.Component {
           <thead>
             <tr>
               <th scope="col" colSpan='8'>
-                <div className='ui fluid search'>
-                  <div className='ui icon input'>
+                <div className='form-row'>
+                  <div className='input-group col-md-6'>
                     <input
-                      className='prompt'
+                      className='form-control'
                       type='text'
+                      id='inputProductSearch'
                       placeholder='Search products ...'
                       value={this.state.searchValue}
                       onChange={this.onSearchChange}
@@ -85,6 +91,18 @@ class ProductSearch extends React.Component {
                       />
                     ) : ''
                   }
+                  {
+                    (Client.getCookie("adminToken")) ? (
+                      <div className="">
+                        <button 
+                          type="button" 
+                          id="productAdd" 
+                          className="btn btn-primary btn-success align-right" 
+                          onClick={this.handleProductAdd}>Add Product 
+                        </button>
+                      </div>
+                    ) : <p></p>
+                  }
                 </div>
               </th>
             </tr>
@@ -96,7 +114,10 @@ class ProductSearch extends React.Component {
               <th scope="col">Size</th>
               <th scope="col">Price</th>
               <th scope="col">Details</th>
+              { !(Client.getCookie("adminToken")) ? (
               <th scope="col">Add To Cart</th>
+              ) : <th></th>
+              }
             </tr>
           </thead>
           <tbody>
@@ -104,7 +125,7 @@ class ProductSearch extends React.Component {
             this.state.products.map((product, index) => (
               <tr
                 key={index}
-                // onClick={() => this.props.onProductClick(product)}
+                onClick={() => this.props.onProductClick(product)}
               >
                 <td>{product.description}</td>
                 <td className='right aligned'>
@@ -129,7 +150,7 @@ class ProductSearch extends React.Component {
                 </td>
                 <td className='center aligned'>
                   {
-                    checkQuantity(product) ? (
+                    (checkQuantity(product) && !Client.getCookie("adminToken")) ? (
                       <a href="#" onClick={() => this.props.onProductClick(product)} >
                         <i
                           className='big shopping cart icon'
@@ -139,7 +160,7 @@ class ProductSearch extends React.Component {
                     <i
                     className='big remove icon red'
                   /> 
-                }
+                  }
 
                   {/* {
                     this.state.addToCartIcon ? (

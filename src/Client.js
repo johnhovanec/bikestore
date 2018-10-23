@@ -45,6 +45,168 @@ function updateProductRating(id, rating, callback) {
 }
 
 
+// Add a product -- Admin only
+// Add api/products/
+function addProduct(data, callback) {
+  var url = 'http://localhost:50813/api/products/';
+  let headers = new Headers({
+    'Content-Type':'application/json; charset=utf-8;'
+    ,'Accept':'*/*'
+  });
+
+  fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  }).then(res => res.text())
+  .catch(error => handleAddProductError(error))
+  .then(response => handleAddProductSuccess(response));
+}
+
+function handleAddProductSuccess(response) {
+  if (response) {
+    console.log("Product was successfully added: ", response);
+    window.alert("Product was successfully added.");
+  }
+}
+
+function handleAddProductError(response) {
+  if (response) {
+    console.log("Error adding product: ", response);
+    window.alert("Error adding product: ");
+  }
+}
+
+// Update a product -- Admin only
+// PUT api/products/1
+function updateProduct(id, data, callback) {
+  var url = 'http://localhost:50813/api/products/' + id;
+  let headers = new Headers({
+    'Content-Type':'application/json; charset=utf-8;'
+    ,'Accept':'*/*'
+  });
+
+  fetch(url, {
+    method: 'PUT',
+    mode: 'cors',
+    headers:{
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  }).then(res => res.text())
+  .catch(error => handleProductUpdateError(error))
+  .then(response => handleProductUpdateSuccess(response));
+}
+
+function handleProductUpdateError(response) {
+  if (response) {
+    console.log("Error updating product: ", response);
+    window.alert("Error updating product: ");
+  }
+}
+
+// Note: a successful put returns a 204 with No Content in the response
+function handleProductUpdateSuccess(response) {
+  if (!response) {
+    console.log("Updating product: ");
+    window.alert("Updating product");
+  }
+  else
+    window.alert("Error in updating product:", response);
+}
+
+// Delete a product -- Admin only
+// DELETE api/products/1
+// function deleteProduct(id, callback) {
+//   var url = 'http://localhost:50813/api/products/' + id;
+//   fetch(url, {
+//     method: 'DELETE',
+//     mode: 'cors',
+//     headers:{
+//       'Access-Control-Allow-Origin': '*'
+//     },
+//   }).then(response => {
+//     // response from server
+//     // check status of response and handle it manually
+//     switch (response.status) {
+//       case 500: console.error('Some server error'); break;
+//       case 401: console.error('Unauthorized'); break;
+//       // ...
+//     }
+//     // check if status in the range 200 to 299
+//     if (response.ok) {
+//       return response;
+//       alert("Delete was successful");
+//     } else {
+//       // push error further for the next catch`
+//       return Promise.reject(response);
+//       // or throw error
+//       throw Error(response.statusText);
+//     }
+//   })
+//   .catch(error => {
+//     // here you will get only Fetch API errors and those you threw or rejected above
+//     // in most cases Fetch API error will look like common Error object
+//     // {
+//     //   name: "TypeError",
+//     //   message: "Failed to fetch",
+//     //   stack: ...
+//     // }
+//   });
+//   //   }).then(res => res.json())
+//   // .catch(error => console.error(error))
+//   // .then(response => console.log(response));
+// }
+
+// function handleDeleteProductSuccess(response) {
+//   if (response) {
+//     console.log("Product was successfully deleted: ", response);
+//     window.alert("Product was successfully deleted.");
+//   }
+// }
+
+// function handleDeleteProductError(response) {
+//   if (response) {
+//     console.log("Error deleted product: ", response);
+//     window.alert("Error deleted product: ");
+//   }
+// }
+
+function deleteProduct(id){
+  // var xhr = new XMLHttpRequest();
+  // var url = 'http://localhost:50813/api/products/' + id;
+  // xhr.open('DELETE', url, true);
+  // xhr.send();
+  // xhr.addEventListener("readystatechange", handleDeleteProduct(xhr), false);
+
+  var xhr = new XMLHttpRequest(),
+      method = "DELETE",
+      url = 'http://localhost:50813/api/products/' + id;
+
+  xhr.open(method, url, true);
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4 && xhr.status === 200) {
+      console.log(">> Product deleted:" + " " + xhr.responseText);
+    }
+  };
+  xhr.send();
+}
+
+function handleDeleteProduct(xhr) {
+  if (xhr.readyState) {
+    console.log("Product was successfully deleted: ", xhr);
+    window.alert("Product was successfully deleted.");
+    //var response = JSON.parse(xhr.responseText);
+    console.log("@@ ", xhr);
+  }
+}
+
+
 function getCartDetail(query, callback) {
   return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
     method: "GET",
@@ -122,7 +284,7 @@ function checkStatus(response) {
     return response;
   } else {
     const error = new Error(`Error: ${response.statusText}`);
-    console.log(error); // eslint-disable-line no-console
+    console.log(error); 
     error.status = response.statusText;
     error.response = response;
     throw error;
@@ -236,6 +398,20 @@ function logout() {
   deleteCookie("adminToken");
 }
 
+const Client = { 
+  search, 
+  getProduct,
+  addProduct, 
+  updateProduct, 
+  deleteProduct, 
+  updateProductRating, 
+  //addProductToCart, 
+  setCookie, 
+  getCookie, 
+  deleteCookie, 
+  //formatter, 
+  logout, 
+  login 
+};
 
-const Client = { search, getProduct, updateProductRating, addToCart, setCookie, getCookie, deleteCookie, logout, login };
 export default Client;
