@@ -37,7 +37,7 @@ class Header extends React.Component {
   }
 
   onSearchSubmit(evt) {
-  	evt.preventDefault();
+    evt.preventDefault();
     console.log("Search clicked: " + evt.target.value);
     
   }
@@ -45,8 +45,8 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        <h5>User logged in?: {this.props.userLoggedIn.toString()}</h5>
-        <HeaderGraphic />
+        {/*<h5>User logged in?: {this.props.userLoggedIn.toString()}</h5>
+        <HeaderGraphic /> */}
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul className="navbar-nav">
@@ -83,6 +83,12 @@ class Header extends React.Component {
                 </ul>
             </div>
         </nav>
+        {/* Display a banner if the user is functioning as an admin */}
+        { (Client.getCookie("adminToken")) ? (
+          <div className="alert alert-warning text-center" role="alert">
+            <strong>Warning!</strong> You are currently logged-in as an Administrator.
+          </div> ) : <div></div>
+        }
       </div>
     );
   }

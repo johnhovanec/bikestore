@@ -31,7 +31,7 @@ class Login extends React.Component {
   render() {
   return (
     <div className="container text-center">
-      <div className="row d-flex justify-content-between">
+      <div className="row d-flex justify-content-center">
        <form className="form-signin col-lg-4" onSubmit={this.submitHandler}>
           <img className="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
           <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -41,7 +41,7 @@ class Login extends React.Component {
                    name="username" 
                    defaultValue={this.state.username} 
                    onChange={this.handleInput} 
-                   className="form-control" 
+                   className="form-control inputLogin" 
                    placeholder="User name" 
                    required autoFocus></input>
           <label htmlFor="inputPassword" className="sr-only">Password</label>
@@ -50,7 +50,7 @@ class Login extends React.Component {
                    name="password" 
                    defaultValue={this.state.password}
                    onChange={this.handleInput} 
-                   className="form-control" 
+                   className="form-control inputLogin" 
                    placeholder="Password" 
                    pattern=".{8,}" required 
                    title="8 characters minimum"></input>

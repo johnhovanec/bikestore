@@ -6,11 +6,7 @@ body {
 }
 
 .App {
-  margin-top: 5em;
-}
-
-#food-search {
-  margin-top: 5em;
+  margin-top: 2em;
 }
 
 .products-container {
@@ -23,4 +19,16 @@ body {
   display: block;
   float: right;
   margin: 0 50px;
+}
+
+#productDelete {
+  margin: 0 25px;
+}
+
+#inputProductSearch {
+  margin: 0 50px 0 0;
+}
+
+.inputLogin {
+  margin-bottom: 20px;
 }
