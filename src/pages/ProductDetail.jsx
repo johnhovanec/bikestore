@@ -112,19 +112,14 @@ class ProductDetail extends React.Component {
 
   handleDelete(event) {
     console.log("Calling handleDelete on id: ", this.props.match.params.id);
-    //window.alert("Caution: You are about to delete a product!");
     Client.deleteProduct(this.props.match.params.id);
-
-    // Move these to fetch call
-    //history.push("/products");
-    //window.location.reload(true);
   }
 
    handleCartSubmit(event) {
     console.log("Cart submitted");
     var data = {
       "id": this.state.product.id, 
-      "name": this.state.name, 
+      //"name": this.state.name, 
       "manufacturer": this.state.manufacturer,
       "model": this.state.model, 
       "type": this.state.type, 
@@ -134,8 +129,8 @@ class ProductDetail extends React.Component {
       "rating": this.state.rating, 
       "price": this.state.price,
       "inventoryQuantity": this.state.inventoryQuantity, 
-      "imagePath": this.state.imagePath,
-      "homePageIndex": this.state.homePageIndex,
+      //"imagePath": this.state.imagePath,
+      //"homePageIndex": this.state.homePageIndex,
       "cartQuantity": this.state.cartQuantity,
       "sessionId": Client.getCookie("customerToken"),
     };
