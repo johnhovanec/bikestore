@@ -147,33 +147,33 @@ function handleProductUpdateSuccess(response) {
 //   });
 // }
 
-function deleteProduct(id, callback) {
-  let url = 'http://localhost:50813/api/products/'+id;
-  fetch(url, {
-    method: 'DELETE',
-    mode: 'cors',
-    headers:{
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(id),
-  }).then(res => res.text())
-  .catch(error => handleDeleteProductError(error))
-  .then(response => handleDeleteProductSuccess(response));
-}
-function handleDeleteProductSuccess(response) {
-  if (response) {
-    console.log("Product was successfully deleted: ", response);
-    //window.alert("Product was successfully deleted.");
-  }
-}
+// function deleteProduct(id, callback) {
+//   let url = 'http://localhost:50813/api/products/'+id;
+//   fetch(url, {
+//     method: 'DELETE',
+//     mode: 'cors',
+//     headers:{
+//       'Accept': 'application/json, text/plain, */*',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(id),
+//   }).then(res => res.text())
+//   .catch(error => handleDeleteProductError(error))
+//   .then(response => handleDeleteProductSuccess(response));
+// }
+// function handleDeleteProductSuccess(response) {
+//   if (response) {
+//     console.log("Product was successfully deleted: ", response);
+//     //window.alert("Product was successfully deleted.");
+//   }
+// }
 
-function handleDeleteProductError(response) {
-  if (response) {
-    console.log("Error deleted product: ", response);
-    //window.alert("Error deleted product: ");
-  }
-}
+// function handleDeleteProductError(response) {
+//   if (response) {
+//     console.log("Error deleted product: ", response);
+//     //window.alert("Error deleted product: ");
+//   }
+// }
 
 // function deleteProduct(id){
 //   // var xhr = new XMLHttpRequest();
@@ -204,6 +204,41 @@ function handleDeleteProductError(response) {
 //   }
 // }
 
+// function deleteProduct(id) {
+//   const url = 'http://localhost:50813/api/products/' + id;
+//     fetch(url)
+//     .then((resp) => resp.json())
+//     .then(function(data) {
+//       console.log("In delete >>> data:" + data.manufacturer + " " + data.model);
+//       return data;
+//     })
+//     .catch(function(error) {
+//       console.log("DELETE ERR: " + error);
+//     });
+// }
+
+function deleteProduct(id) {
+  const url = 'http://localhost:50813/api/products/' + id;
+  return fetch(url, {
+      method: "DELETE", 
+      mode: "cors", // no-cors, cors, *same-origin
+      headers: {
+          "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(id), // body data type must match "Content-Type" header
+  })
+  .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("In delete >>> data:" + data.manufacturer + " " + data.model);
+      alert(data.manufacturer + " " + data.model + " successfully deleted");
+      window.history.go(-2);
+      window.location.reload(true);
+      return data;
+    })
+    .catch(function(error) {
+      console.log("DELETE ERR: " + error);
+    });
+}
 
 function getCartDetail(query, callback) {
   return fetch(`http://localhost:50813/api/shoppingcarts/${query}`, {
