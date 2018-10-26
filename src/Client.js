@@ -342,19 +342,6 @@ function handleLoginSuccess(response) {
   else {
     console.log('handleLoginResponse Success:', response);
 
-      return fetch(`http://localhost:50813/api/sessions/` + response.id, {
-            method: 'PUT',
-            mode: 'cors',
-            headers:{
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(response)
-          }).then(res => res.json())
-          .catch(error => console.log(error))
-          .then(response => console.log(response));
-    
-
     switch (response.userSessionType) {
       // Customer user
       case 1:
