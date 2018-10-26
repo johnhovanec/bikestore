@@ -51,7 +51,7 @@ class ProductDetail extends React.Component {
         inventoryQuantity: product.inventoryQuantity, 
         imagePath: product.imagePath,
         homePageIndex: product.homePageIndex,
-        cartQuantity: 1,
+        cartQuantity: "1",
       });
     });
   }

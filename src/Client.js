@@ -251,8 +251,7 @@ function addProductToCart(data) {
   })
   .then((resp) => resp.json())
     .then(function(data) {
-      console.log("Add Product to Cart >>> data: " + data.manufacturer + " " + data.model);
-      alert(data.manufacturer + " " + data.model + " successfully deleted");
+      console.log("Add Product to Cart >>> data: " + data.id + " " + data.userId);
       return data;
     })
     .catch(function(error) {
