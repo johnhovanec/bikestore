@@ -237,8 +237,9 @@ function updateCart(data, callback) {
 
 //api/shoppingcarts
 function addProductToCart(data) {
+  console.log("In addProductToCart, data: " + data);
   const url = 'http://localhost:50813/api/shoppingcarts/';
-  let sessionId = getCookie("customerToken");
+  const sessionId = getCookie("customerToken");
   return fetch(url, {
       method: "POST", 
       mode: "cors", 
