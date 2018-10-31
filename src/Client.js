@@ -10,7 +10,7 @@ function search(query, callback) {
 }
 
 // Retrieve a single product
-// GET api/products/1
+// GET api/products/{productId}
 function getProduct(query, callback) {
   return fetch(`http://localhost:50813/api/products/${query}`, {
     method: "GET",
@@ -18,6 +18,18 @@ function getProduct(query, callback) {
   }).then(checkStatus)
     .then(parseJSON)
     .then(callback)
+    .catch((error) => console.log(error.message));
+}
+
+
+// Retrieve the shopping cart
+// GET api/shoppingcarts/{userId}
+function getShoppingCart(query) {
+  return fetch(`http://localhost:50813/api/sessions/${query}`, {
+    method: "GET",
+    accept: 'application/json',
+  }).then(checkStatus)
+    .then(parseJSON)
     .catch((error) => console.log(error.message));
 }
 
@@ -408,6 +420,7 @@ const Client = {
   deleteProduct, 
   updateProductRating, 
   addProductToCart, 
+  getShoppingCart,
   setCookie, 
   getCookie, 
   deleteCookie, 
