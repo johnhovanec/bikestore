@@ -236,29 +236,49 @@ function updateCart(data, callback) {
 // }
 
 //api/shoppingcarts
+// function addProductToCart(data) {
+//   console.log("In addProductToCart, data: " + data);
+//   const url = 'http://localhost:50813/api/shoppingcarts/';
+//   const sessionId = getCookie("customerToken");
+//   return fetch(url, {
+//       method: "POST", 
+//       mode: "cors", 
+//       headers: {
+//           "Accept": "application/json, text/plain, */*",
+//           "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(data), 
+//   })
+//   .then((resp) => resp.json())
+//     .then(function(data) {
+//       console.log("Add Product to Cart >>> data: " + data.id + " " + data.userId);
+//       return data;
+//     })
+//     .catch(function(error) {
+//       console.log("AddToCart Error: " + error);
+//     });
+// }
+
+
 function addProductToCart(data) {
-  console.log("In addProductToCart, data: " + data);
-  const url = 'http://localhost:50813/api/shoppingcarts/';
-  const sessionId = getCookie("customerToken");
-  return fetch(url, {
-      method: "POST", 
-      mode: "cors", 
-      headers: {
-          "Accept": "application/json, text/plain, */*",
-          "Content-Type": "application/json; charset=utf-8",
-      },
-      body: JSON.stringify(data), 
-  })
-  .then((resp) => resp.json())
-    .then(function(data) {
-      console.log("Add Product to Cart >>> data: " + data.id + " " + data.userId);
-      return data;
-    })
-    .catch(function(error) {
-      console.log("AddToCart Error: " + error);
-    });
+  console.log("Calling addProductToCart: " + data);
+  return fetch(`http://localhost:50813/api/shoppingcarts/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.text())
+      .catch(error => alert("ERROR Adding product to cart. Please try again: " + error))
+      .then(response => handleAddToCartSuccess(response));
 }
 
+function handleAddToCartSuccess(response) {
+  alert("Success in adding product to cart");
+  window.location.href = "http://localhost:3000/products";
+}
 
 // Helper method to check the AJAX response
 function checkStatus(response) {
