@@ -23,15 +23,16 @@ function getProduct(query, callback) {
 
 
 // Retrieve the shopping cart
-// GET api/shoppingcarts/{userId}
-function getShoppingCart(query) {
-  return fetch(`http://localhost:50813/api/sessions/${query}`, {
-    method: "GET",
+// GET api/shoppingcarts/getsessionuser/${sessionId}
+function getShoppingCart(query, callback) {
+  return fetch(`http://localhost:50813/api/shoppingcarts/session?sessionId=${query}`, {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON)
+    .then(callback)
     .catch((error) => console.log(error.message));
 }
+
 
 // Update a product rating using PATCH
 // PATCH api/products/1
@@ -184,93 +185,6 @@ function updateCart(data, callback) {
       .catch(error => console.error('Error:', error))
       .then(response => console.log('Success:', response));
 }
-
-// function addToCart(data, callback) {
-//   var url = 'http://localhost:50813/api/shoppingcarts/';
-//     let headers = new Headers({
-//       'Content-Type':'application/json; charset=utf-8;'
-//       ,'Accept':'*/*'
-//     });
-
-//     // check for an existing cart with customerId
-//     let existingCustId = getCookie("customerId");
-//     debugger;
-//     let z = getCartDetail(existingCustId);
-//     if (!getCartDetail(existingCustId))
-//     {
-//       // to generate faux customerIds
-//       let date = new Date();
-//       let custId = Math.round(date.getTime() / 1000);
-//       setCookie("customerId", custId, 1);
-//       let data = {
-//         "customerid": custId,
-//         "carttimestamp": new Date()
-//         };
-//       debugger;
-//       console.log("ready to send fetch...")
-
-//       fetch(url, {
-//         method: 'POST',
-//         mode: 'cors',
-//         headers:{
-//           'Accept': 'application/json, text/plain, */*',
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//       }).then(res => res.json())
-//       .catch(error => console.error('Error:', error))
-//       .then(response => console.log('Success:', response));
-//     }
-//     else
-//     {
-//       console.log("Cart already exists for Id: " + existingCustId);
-//       updateCart(data);
-//     }
-// }
-
-
-// function addProductToCart(data, callback) {
-//   const url = 'http://localhost:50813/api/shoppingcarts/';
-//   // check for an existing cart with customerId
-//   let sessionId = getCookie("customerToken");
-
-//   fetch(url, {
-//     method: 'POST',
-//     mode: 'cors',
-//     headers:{
-//       'Accept': 'application/json, text/plain, */*',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-//   }).then(res => res.json())
-//   .catch(error => console.error('Error:', error))
-//   .then(response => console.log('Success:', response));
-// }
-
-//api/shoppingcarts
-// function addProductToCart(data) {
-//   console.log("In addProductToCart, data: " + data);
-//   const url = 'http://localhost:50813/api/shoppingcarts/';
-//   const sessionId = getCookie("customerToken");
-//   return fetch(url, {
-//       method: "POST", 
-//       mode: "cors", 
-//       headers: {
-//           "Accept": "application/json, text/plain, */*",
-//           "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(data), 
-//   })
-//   .then((resp) => resp.json())
-//     .then(function(data) {
-//       console.log("Add Product to Cart >>> data: " + data.id + " " + data.userId);
-//       return data;
-//     })
-//     .catch(function(error) {
-//       console.log("AddToCart Error: " + error);
-//     });
-// }
-
 
 function addProductToCart(data) {
   console.log("Calling addProductToCart: " + data);

@@ -16,15 +16,15 @@ class ShoppingCart extends React.Component {
         console.log("No customerToken for shopping cart page, redirecting to /register");
         history.push("/register");
     }
-    console.log(Client.getCookie("customerToken"));
+    console.log("In Cart: " + Client.getCookie("customerToken"));
 
-    Client.getShoppingCart(this.state.customerToken, (products) => {
+    Client.getShoppingCart(this.state.customerToken, (cartProducts) => {
       this.setState({
-        products: products.slice(),
-      });
-    });
-  }
+          products: cartProducts.slice(), 
+     });
 
+    });
+}
 
   render() {
     return (
