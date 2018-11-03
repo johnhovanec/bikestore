@@ -1,13 +1,18 @@
 import React from 'react';
 import Client from './../Client';
 import history from './../history';
-
+let cartTotal = 0;
 
 class ShoppingCart extends React.Component {
-  state = {
-    products: [],
-    customerToken: Client.getCookie("customerToken"),
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      customerToken: Client.getCookie("customerToken"),
+    };
+
+    this.handleDelete = this.handleDelete.bind(this);
+}
 
   componentDidMount() {
     console.log("Shopping Cart mounted for initial populate.");
@@ -25,6 +30,18 @@ class ShoppingCart extends React.Component {
 
     });
 }
+
+sumCart(subtotal) {
+  console.log("In sumCart: " + subtotal);
+  cartTotal = cartTotal + subtotal;
+  console.log("In cartTotal: " + cartTotal);
+}
+
+handleDelete(id) {
+    console.log("Calling handleDelete from Cart on id: ", id);
+    Client.deleteProductFromCart(id);
+  }
+
 
   render() {
     return (
@@ -45,6 +62,7 @@ class ShoppingCart extends React.Component {
                 <th className='center aligned'>Size</th>
                 <th className='center aligned'>Qty</th>
                 <th className='center aligned'>Price</th>
+                <th className='center aligned'></th>
               </tr>
             </thead>
             <tbody>
@@ -52,9 +70,8 @@ class ShoppingCart extends React.Component {
             this.state.products.map((product, index) => (
               <tr
                 key={index}
-                onClick={() => this.props.onProductClick(product)}
+               
               >
-                <td>{product.description}</td>
                 <td className='right aligned'>
                   {product.model}
                 </td>
@@ -68,12 +85,14 @@ class ShoppingCart extends React.Component {
                   {product.size}
                 </td>
                 <td className='right aligned'>
-                  {product.price}
+                  {product.quantity}
                 </td>
                 <td className='right aligned'>
-                  <a href="#" onClick={() => this.props.onDetailClick(product)} >
-                    <i className='info circle icon'/> Details
-                  </a>
+                  {product.unitPrice * product.quantity}
+                  { this.sumCart(product.unitPrice * product.quantity) }
+                </td>
+                <td>
+                  <button type="button" id="productDelete" data-id={product.id} className="btn btn-sm btn-primary" onClick={this.handleDelete.bind(this, product.id)}>Delete</button>
                 </td>
               </tr>
             ))
@@ -82,12 +101,7 @@ class ShoppingCart extends React.Component {
             <tfoot>
               <tr>
                 <th colSpan="5">Total</th>
-                <th
-                  className='center aligned'
-                  id='price'
-                >
-                  
-                </th>
+                <td className='center aligned' id='price'>${cartTotal}</td>
               </tr>
             </tfoot>
           </table>

@@ -201,6 +201,29 @@ function addProductToCart(data) {
       .then(response => handleAddToCartSuccess(response));
 }
 
+function deleteProductFromCart(id) {
+  const url = "http://localhost:50813/api/shoppingcartproducts/" + id;
+  return fetch(url, {
+      method: "DELETE", 
+      mode: "cors", 
+      headers: {
+          "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(id), 
+  })
+  .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("In delete product from cart >>> id: " + data.model);
+      alert("Product deleted from cart");
+      window.location.reload(true);
+      return data;
+    })
+    .catch(function(error) {
+      console.log("DELETE From CART ERR: " + error);
+    });
+}
+
+
 function handleAddToCartSuccess(response) {
   alert("Success in adding product to cart");
   window.location.href = "http://localhost:3000/products";
@@ -334,6 +357,7 @@ const Client = {
   deleteProduct, 
   updateProductRating, 
   addProductToCart, 
+  deleteProductFromCart,
   getShoppingCart,
   setCookie, 
   getCookie, 
