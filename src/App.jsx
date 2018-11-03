@@ -28,9 +28,9 @@ import './App.css';
 // Client.setCookie("sessionId", sessionId, 1);
 
 // to generate sessionIds for session and allow anonymous users to create a shopping cart
-const uuidv1 = require('uuid/v1');
-const sessionId = uuidv1();
-Client.setCookie("customerToken", "An_" + sessionId, 1);
+// const uuidv1 = require('uuid/v1');
+// const sessionId = uuidv1();
+// Client.setCookie("customerToken", "An_" + sessionId, 1);
 
 
 class App extends React.Component {
