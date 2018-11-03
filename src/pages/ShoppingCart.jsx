@@ -19,7 +19,8 @@ class ShoppingCart extends React.Component {
 
     if (!Client.getCookie("customerToken")) {
         console.log("No customerToken for shopping cart page, redirecting to /register");
-        history.push("/register");
+        history.push("/home");
+        return;
     }
     console.log("In Cart: " + Client.getCookie("customerToken"));
 

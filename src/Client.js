@@ -275,6 +275,36 @@ function deleteCookie(name) {
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
 
+function registerNewCustomer(username, email, password, phone, fName, mName, lName) {
+  console.log("#@# ", username, email, password, phone, fName, mName, lName);
+  let data = {
+        "Username": username,
+        "Email": email,
+        "Password": password,
+        "Phone": phone,
+        "FName": fName,
+        "MName": mName,
+        "LName": lName
+        };
+  return fetch(`http://localhost:50813/api/users/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+      .catch(error => console(error))
+      .then(response => handleRegistrationSuccess(response));
+}
+
+function handleRegistrationSuccess(response) {
+  alert("Thank you for registering ",response);
+  login(response.username, response.password);
+  window.location.href = "http://localhost:3000/products";
+}
+
 function login(username, password) {
   console.log("Calling Client login with: " + username + " " + password);
   // POST user credentials to API
@@ -305,7 +335,7 @@ function handleLoginSuccess(response) {
   // An undefined reponse implies credentials failed
   if (!response) {
     // Then set a flash message
-    window.alert("Your credentials were not successful, please try again.");
+    //window.alert("Your credentials were not successful, please try again.");
     return;
   }
   else {
@@ -362,7 +392,7 @@ const Client = {
   setCookie, 
   getCookie, 
   deleteCookie, 
-  //formatter, 
+  registerNewCustomer,
   logout, 
   login 
 };

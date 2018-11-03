@@ -26,7 +26,7 @@ class ProductsContainer extends React.Component {
         <div className='shopping-cart-container'>
           <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
           <p><b>customerId:</b> {Client.getCookie("customerId")}</p>
-          <ShoppingCart
+          {/*<ShoppingCart
               products={this.state.productsSelected}
               onProductClick={
                 (index) => (
@@ -41,6 +41,7 @@ class ProductsContainer extends React.Component {
                 )
               }
             />
+          */}
         </div>
         <div className='products-container'>
           <Products

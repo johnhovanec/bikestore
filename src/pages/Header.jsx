@@ -20,6 +20,7 @@ class Header extends React.Component {
         {path: "/Products", text: "Bikes", isActive: false},
         {path: "/Cart", text: "Cart", isActive: false},
         {path: "/Login", text: "login", className:"nav-align-right", isActive: false},
+        {path: "/Register", text: "Register", isActive: false},
         {path: "/Checkout", text: "Checkout", isActive: false},
         // {path: "/posttest", text: "post", isActive: false},
         // {path: "/cart", text: "Add To Cart", isActive: false},
