@@ -5,12 +5,19 @@ import history from './../history';
 const MAX_NUMBER_OF_PRODUCTS = 20;
 
 class ProductSearch extends React.Component {
-  state = {
-    products: [],
-    clearSearchIcon: false,
-    addToCartIcon: '',
-    searchValue: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      clearSearchIcon: false,
+      addToCartIcon: '',
+      searchValue: '',
+      sortProperty: '',
+      sortedProducts: [],
+    };
+
+    this.handleSortChange = this.handleSortChange.bind(this);
+}
 
   componentDidMount() {
     console.log("Component mounted and now calling search for initial populate.");
@@ -19,6 +26,42 @@ class ProductSearch extends React.Component {
         products: products.slice(0, MAX_NUMBER_OF_PRODUCTS),
       });
     });
+  }
+
+  handleSortChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      sortProperty: value
+    });
+
+    switch (value) {
+      case 'Price Ascending':
+        let tempArray = [].concat(this.state.products);
+        console.log(tempArray);
+        tempArray.sort((a, b) => a.price - b.price);
+        console.log(tempArray);
+        this.setState({
+          products: this.state.products.sort((a, b) => a.price - b.price),
+        });
+        console.log("$$ " + this.state.sortedProducts);
+        break;
+      case 'Price Descending':
+        this.setState({
+          products: this.state.products.sort((a, b) => b.price - a.price),
+        });
+        break;
+      case 'Rating Ascending':
+        break;
+      case 'Rating Descending':
+        break;
+      default:
+        let sortedProducts = [].concat(this.state.products);
+    }
+    
+    
   }
 
   handleProductAdd() {
@@ -82,6 +125,25 @@ class ProductSearch extends React.Component {
                       onChange={this.onSearchChange}
                     />
                     <i className='search icon' />
+                  </div>
+                  <div>
+                    <form className="form-inline">
+                      <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">Sort By</label>
+                      <select 
+                        className="custom-select mb-2 mr-sm-2 mb-sm-0" 
+                        id="sortProperty" 
+                        className="form-control"
+                        name="sortProperty"
+                        value={this.state.sortProperty ? this.state.sortProperty : ""}
+                        onChange={this.handleSortChange}>
+                      >
+                        <option value="Not Selected">Default</option>
+                        <option value="Price Ascending">Price Ascending</option>
+                        <option value="Price Descending">Price Descending</option>
+                        <option value="Rating Ascending">Rating Ascending</option>
+                        <option value="Rating Descending">Rating Descending</option>
+                      </select>
+                    </form>
                   </div>
                   {
                     this.state.clearSearchIcon ? (
