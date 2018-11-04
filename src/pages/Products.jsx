@@ -110,8 +110,8 @@ class ProductSearch extends React.Component {
 
   render() {
     return (
-      <div id=''>
-        <table className='table table-hover'>
+      <div id="row">
+        <table className='row col-md-10 table table-hover'>
           <thead>
             <tr>
               <th scope="col" colSpan='8'>
@@ -214,29 +214,6 @@ class ProductSearch extends React.Component {
                   <a href="#" onClick={() => this.props.onDetailClick(product)} >
                     <i className='info circle icon'/> Details
                   </a>
-                </td>
-                <td className='center aligned'>
-                  {
-                    (checkQuantity(product) && !Client.getCookie("adminToken")) ? (
-                      <a href="#" onClick={() => this.props.onProductClick(product)} >
-                        <i
-                          className='big shopping cart icon'
-                        /> Add to Cart
-                      </a>
-                    ) :
-                    <i
-                    className='big remove icon red'
-                  /> 
-                  }
-
-                  {/* {
-                    this.state.addToCartIcon ? (
-                      <i
-                        className='big remove icon'
-                        onClick={this.onRemoveIconClick}
-                      />
-                    ) : 'Nope'
-                  } */}
                 </td>
               </tr>
             ))
