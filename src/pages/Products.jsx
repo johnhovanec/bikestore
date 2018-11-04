@@ -39,14 +39,9 @@ class ProductSearch extends React.Component {
 
     switch (value) {
       case 'Price Ascending':
-        let tempArray = [].concat(this.state.products);
-        console.log(tempArray);
-        tempArray.sort((a, b) => a.price - b.price);
-        console.log(tempArray);
         this.setState({
           products: this.state.products.sort((a, b) => a.price - b.price),
         });
-        console.log("$$ " + this.state.sortedProducts);
         break;
       case 'Price Descending':
         this.setState({
@@ -54,8 +49,14 @@ class ProductSearch extends React.Component {
         });
         break;
       case 'Rating Ascending':
+        this.setState({
+          products: this.state.products.sort((a, b) => a.rating - b.rating),
+        });
         break;
       case 'Rating Descending':
+        this.setState({
+          products: this.state.products.sort((a, b) => b.rating - a.rating),
+        });
         break;
       default:
         let sortedProducts = [].concat(this.state.products);
@@ -174,6 +175,7 @@ class ProductSearch extends React.Component {
               <th scope="col">Manufacturer</th>
               <th scope="col">Color</th>
               <th scope="col">Size</th>
+              <th scope="col">Rating</th>
               <th scope="col">Price</th>
               <th scope="col">Details</th>
               { !(Client.getCookie("adminToken")) ? (
@@ -201,6 +203,9 @@ class ProductSearch extends React.Component {
                 </td>
                 <td className='right aligned'>
                   {product.size}
+                </td>
+                <td className='right aligned'>
+                  {product.rating}
                 </td>
                 <td className='right aligned'>
                   {product.price}
