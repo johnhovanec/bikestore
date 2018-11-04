@@ -23,27 +23,7 @@ class ProductsContainer extends React.Component {
   render() {
     return (
       <div className='App'>
-        <div className='shopping-cart-container'>
-          <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
-          <p><b>customerId:</b> {Client.getCookie("customerId")}</p>
-          {/*<ShoppingCart
-              products={this.state.productsSelected}
-              onProductClick={
-                (index) => (
-                  this.setState({
-                    productsSelected: [
-                      ...this.state.productsSelected.slice(0, index),
-                      ...this.state.productsSelected.slice(
-                        index + 1, this.state.productsSelected.length
-                      ),
-                    ],
-                  })
-                )
-              }
-            />
-          */}
-        </div>
-        <div className='products-container'>
+        <div className='row'>
           <Products
             onProductClick={
               (product) => (
