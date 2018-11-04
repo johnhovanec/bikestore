@@ -37,6 +37,10 @@ class ProductSearch extends React.Component {
       sortProperty: value
     });
 
+    this.sortProducts(value);
+  }
+
+  sortProducts(value) {
     switch (value) {
       case 'Price Ascending':
         this.setState({
@@ -61,8 +65,6 @@ class ProductSearch extends React.Component {
       default:
         let sortedProducts = [].concat(this.state.products);
     }
-    
-    
   }
 
   handleProductAdd() {
@@ -88,10 +90,13 @@ class ProductSearch extends React.Component {
 
     }
     Client.search(value, (products) => {
-      this.setState({
-        products: products.slice(0, MAX_NUMBER_OF_PRODUCTS),
+       this.setState({
+          products: products.slice(0, MAX_NUMBER_OF_PRODUCTS),
+       },() => { 
+       // setState is asynchronous, the following is executed after the callback returns
+        this.sortProducts(this.state.sortProperty)
       });
-    });
+    });  
   };
 
   onRemoveIconClick = () => {
