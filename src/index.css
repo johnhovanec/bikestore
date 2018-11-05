@@ -32,3 +32,11 @@ body {
 .inputLogin {
   margin-bottom: 20px;
 }
+
+.filler {
+  margin-top: 20px;
+}
+
+.ratingBtn {
+  margin: 3px;
+}

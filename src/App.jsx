@@ -21,16 +21,14 @@ import uuid from 'uuid';
 // import GetCart from './GetCart';
 import './App.css';
 
-// Create a unique sessionId for the session to expire in 1 day
+// Create a unique sessionId for the session to expire in 10 days
 // const uuidv1 = require('uuid/v1');
 // const sessionId = uuidv1();
-// console.log("sessionId: " + sessionId);
-// Client.setCookie("sessionId", sessionId, 1);
+// if (!Client.getCookie("sessionId")) {
+//   Client.setCookie("sessionId", "S_" + sessionId, 10);
+//   Client.setSessionId("S_" + sessionId);
+// }
 
-// to generate sessionIds for session and allow anonymous users to create a shopping cart
-// const uuidv1 = require('uuid/v1');
-// const sessionId = uuidv1();
-// Client.setCookie("customerToken", "An_" + sessionId, 1);
 
 
 class App extends React.Component {

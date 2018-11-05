@@ -2,7 +2,7 @@ import React from 'react';
 import Client from './../Client';
 
 const Home = () => (
-  <div>
+  <div className="container filler">
     <h3>Home page</h3>
     <p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
     <p>
@@ -14,6 +14,5 @@ const Home = () => (
     </p>
   </div>
 );
-
 
 export default Home;

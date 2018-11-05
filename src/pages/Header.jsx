@@ -19,7 +19,7 @@ class Header extends React.Component {
         {path: "/About", text: "About", isActive: false},
         {path: "/Products", text: "Bikes", isActive: false},
         {path: "/Cart", text: "Cart", isActive: false},
-        {path: "/Login", text: "login", className:"nav-align-right", isActive: false},
+        {path: "/Login", text: "Login", className:"nav-align-right", isActive: false},
         {path: "/Register", text: "Register", isActive: false},
         {path: "/Checkout", text: "Checkout", isActive: false},
         // {path: "/posttest", text: "post", isActive: false},
@@ -75,7 +75,7 @@ class Header extends React.Component {
                       (Client.getCookie("customerToken")) || (Client.getCookie("adminToken")) ? (
                         <a href="#" className="nav-link" onClick={Client.logout}>Logout</a>
                       ) :
-                         <a className="nav-link" href="#">Login</a>
+                         <a className="nav-link" href="#"></a>
                     }
                     </li>
                     <li className="nav-item">

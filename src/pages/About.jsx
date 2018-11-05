@@ -2,7 +2,7 @@ import React from 'react';
 import Client from './../Client';
 
 const About = ({match}) => (
-	<div>
+	<div className="container filler">
 		<h3>About page</h3>
 		<p><b>sessionId:</b> {Client.getCookie("sessionId")}</p>
 		<p>
@@ -18,6 +18,5 @@ const About = ({match}) => (
 		</p>
 	</div>
 );
-
 
 export default About;

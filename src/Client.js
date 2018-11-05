@@ -197,7 +197,7 @@ function addProductToCart(data) {
         },
         body: JSON.stringify(data)
       }).then(res => res.text())
-      .catch(error => alert("ERROR Adding product to cart. Please try again: " + error))
+      .catch(error =>console.log(error))
       .then(response => handleAddToCartSuccess(response));
 }
 
@@ -305,6 +305,27 @@ function handleRegistrationSuccess(response) {
   window.location.href = "http://localhost:3000/products";
 }
 
+// Store a sessionId for any site visitors
+function setSessionId(sessionId) {
+  //Create a unique sessionId for the session
+  const now  = new Date().toLocaleString();
+  let data = {
+        "SessionId": sessionId,
+        "Timestamp": now
+        };
+  return fetch(`http://localhost:50813/api/sessions/sessionId`, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+      .catch(error => console.log(error))
+      .then(response => console.log(response));
+}
+
 function login(username, password) {
   console.log("Calling Client login with: " + username + " " + password);
   // POST user credentials to API
@@ -389,6 +410,7 @@ const Client = {
   addProductToCart, 
   deleteProductFromCart,
   getShoppingCart,
+  setSessionId,
   setCookie, 
   getCookie, 
   deleteCookie, 

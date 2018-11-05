@@ -119,7 +119,7 @@ class ProductSearch extends React.Component {
         <table className='row col-md-10 table table-hover'>
           <thead>
             <tr>
-              <th scope="col" colSpan='8'>
+              <th scope="col" colSpan='12'>
                 <div className='form-row'>
                   <div className='input-group col-md-6'>
                     <input
@@ -161,11 +161,11 @@ class ProductSearch extends React.Component {
                   }
                   {
                     (Client.getCookie("adminToken")) ? (
-                      <div className="">
+                      <div className="col-md-2">
                         <button 
                           type="button" 
                           id="productAdd" 
-                          className="btn btn-primary btn-success align-right" 
+                          className="btn btn-md btn-primary btn-success align-right" 
                           onClick={this.handleProductAdd}>Add Product 
                         </button>
                       </div>
@@ -184,7 +184,7 @@ class ProductSearch extends React.Component {
               <th scope="col">Price</th>
               <th scope="col">Details</th>
               { !(Client.getCookie("adminToken")) ? (
-              <th scope="col">Add To Cart</th>
+              <th></th>
               ) : <th></th>
               }
             </tr>

@@ -8,6 +8,7 @@ class ShoppingCart extends React.Component {
     super(props);
     this.state = {
       products: [],
+      total: [],
       customerToken: Client.getCookie("customerToken"),
     };
 
@@ -18,18 +19,24 @@ class ShoppingCart extends React.Component {
     console.log("Shopping Cart mounted for initial populate.");
 
     if (!Client.getCookie("customerToken")) {
-        console.log("No customerToken for shopping cart page, redirecting to /register");
-        history.push("/home");
+        alert("Please sign in or register to save items to a cart, redirecting to /login");
+        history.push("/login");
         return;
     }
     console.log("In Cart: " + Client.getCookie("customerToken"));
 
-    Client.getShoppingCart(this.state.customerToken, (cartProducts) => {
-      this.setState({
-          products: cartProducts.slice(), 
-     });
-
-    });
+    if (Client.getCookie("customerToken")) {
+      Client.getShoppingCart(this.state.customerToken, (cartProducts) => {
+        let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
+        this.setState({
+          products: cartProducts.slice(),
+          total: cartTotal,
+        },() => { 
+          // setState is asynchronous, the following is executed after the callback returns
+          console.log("Cart total: ", this.state.total)
+        });
+    }); 
+  }
 }
 
 sumCart(subtotal) {
@@ -102,7 +109,7 @@ handleDelete(id) {
             <tfoot>
               <tr>
                 <th colSpan="5">Total</th>
-                <td className='center aligned' id='price'>${cartTotal}</td>
+                <td className='center aligned' id='price'>${this.state.total}</td>
               </tr>
             </tfoot>
           </table>

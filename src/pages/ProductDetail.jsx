@@ -1,7 +1,6 @@
 import React from 'react';
 import Client from './../Client';
-import { FaThumbsUp } from 'react-icons/fa';
-import { FaChevronCircleUp } from 'react-icons/fa';
+import { FaThumbsUp, FaCaretUp, FaCaretDown } from 'react-icons/fa';
 import history from './../history';
 
 
@@ -184,9 +183,9 @@ class ProductDetail extends React.Component {
                   {this.state.product.price}
                 </td>
                 <td className='right aligned'>
-                  <button onClick={(e) => this.decrementRating(e)}> - </button>
+                  <FaCaretDown className="ratingBtn" onClick={(e) => this.decrementRating(e)} />
                   {this.state.rating} 
-                  <button onClick={(e) => this.incrementRating(e)}> + </button>
+                  <FaCaretUp className="ratingBtn" onClick={(e) => this.incrementRating(e)} />
                 </td>
                 <td>
                   <input 

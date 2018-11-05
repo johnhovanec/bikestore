@@ -29,7 +29,6 @@ class Register extends React.Component {
 
   submitHandler(event) {
     event.preventDefault()
-    // do some sort of verification here
     if (this.state.password != this.state.confirmPassword) {
       alert("The passwords do not match, try again");
       return;
@@ -45,7 +44,6 @@ class Register extends React.Component {
       );
   }
 
-  
   render() {
   return (
     <div className="container text-center">
@@ -128,13 +126,12 @@ class Register extends React.Component {
             </input>
           <button className="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
         </form>
-
-        
       </div>
     </div>
   );
   }
 }
+
 export default Register;
 
 
