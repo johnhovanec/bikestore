@@ -13,6 +13,7 @@ class ShoppingCart extends React.Component {
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleCartTotalUpdate = this.handleCartTotalUpdate.bind(this);
+    this.handleCartProductUpdate = this.handleCartProductUpdate.bind(this);
 }
 
   componentDidMount() {
@@ -29,6 +30,8 @@ class ShoppingCart extends React.Component {
       Client.getShoppingCart(this.state.customerToken, (cartProducts) => {
         let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
         this.handleCartTotalUpdate(cartTotal);
+        this.handleCartProductUpdate(cartProducts);
+
         this.setState({
           products: cartProducts.slice(),
         },() => { 
@@ -41,6 +44,10 @@ class ShoppingCart extends React.Component {
 
 handleCartTotalUpdate(total){
   this.props.updateCartTotal(total);
+}
+
+handleCartProductUpdate(x){
+  this.props.updateCartProducts(x);
 }
 
 sumCart(subtotal) {
