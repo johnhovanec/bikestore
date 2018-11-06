@@ -37,6 +37,7 @@ class App extends React.Component {
         loggedIn: false,
         shoppingCartTotal: '',
         cartProducts: [],
+        user: '',
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -55,7 +56,8 @@ class App extends React.Component {
 
   handleLogin(event) {
     this.setState({
-         loggedIn: true
+         loggedIn: true,
+         user: event,
       },() => { 
       // setState is asynchronous, the following is executed after the callback returns
        console.log("handleLogin from App.js", this.state.loggedIn);
@@ -71,7 +73,10 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div>
-          <Header userLoggedIn={this.state.loggedIn}/>
+          <Header 
+            userLoggedIn={this.state.loggedIn}
+            loggedInUser={this.state.user}
+          />
           <Route exact path="/" component={Home} />
           <Route exact path="/Home" component={Home} />
           <Route exact path="/About" component={About} />
@@ -93,7 +98,8 @@ class App extends React.Component {
           <Route exact path="/productAdd" component={ProductAdd} />
           <Route
             path="/login"
-            render={(props) => <Login {...props} handleLogin={this.handleLogin.bind(this)} />}
+            render={(props) => <Login {...props} 
+            handleLogin={this.handleLogin.bind(this)} />}
           />
           {/*<Route path="/login" render={props => <Login handleLogin = {this.handleLogin} />} />*/}
         </div>

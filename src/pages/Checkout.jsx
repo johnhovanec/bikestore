@@ -9,10 +9,13 @@ class Checkout extends React.Component {
         tax: '',
         sourceCode: '',  
         subtotal: '', 
-        total: '', 
     };
   }
   
+  componentDidMount() {
+    
+  }
+
   render() {
   if (!Client.getCookie("customerToken"))
   {

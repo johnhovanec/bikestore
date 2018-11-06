@@ -11,7 +11,12 @@ class Login extends React.Component {
   }
   this.submitHandler = this.submitHandler.bind(this)
   this.handleInput = this.handleInput.bind(this)
+  this.handleLoginAction = this.handleLoginAction.bind(this);
 }
+
+  handleLoginAction(user){
+    this.props.handleLogin(user);
+  }
 
   handleInput(event) {
     const target = event.target
@@ -24,6 +29,7 @@ class Login extends React.Component {
     event.preventDefault()
     // do some sort of verification here
     Client.login(`${this.state.username}`,`${this.state.password}`);
+    this.handleLoginAction(this.state.username);
     {/*this.props.push(`${this.state.where}/${this.state.what}`)*/}
   }
 
