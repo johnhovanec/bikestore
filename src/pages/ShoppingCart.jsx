@@ -8,11 +8,11 @@ class ShoppingCart extends React.Component {
     super(props);
     this.state = {
       products: [],
-      total: [],
       customerToken: Client.getCookie("customerToken"),
     };
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleCartTotalUpdate = this.handleCartTotalUpdate.bind(this);
 }
 
   componentDidMount() {
@@ -28,15 +28,19 @@ class ShoppingCart extends React.Component {
     if (Client.getCookie("customerToken")) {
       Client.getShoppingCart(this.state.customerToken, (cartProducts) => {
         let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
+        this.handleCartTotalUpdate(cartTotal);
         this.setState({
           products: cartProducts.slice(),
-          total: cartTotal,
         },() => { 
           // setState is asynchronous, the following is executed after the callback returns
           console.log("Cart total: ", this.state.total)
         });
     }); 
   }
+}
+
+handleCartTotalUpdate(total){
+  this.props.updateCartTotal(total);
 }
 
 sumCart(subtotal) {
@@ -109,7 +113,7 @@ handleDelete(id) {
             <tfoot>
               <tr>
                 <th colSpan="5">Total</th>
-                <td className='center aligned' id='price'>${this.state.total}</td>
+                <td className='center aligned' id='price'>${this.props.shoppingCartTotal}</td>
               </tr>
             </tfoot>
           </table>

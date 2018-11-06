@@ -48,15 +48,15 @@ class ProductsContainer extends React.Component {
   }
 }
 
-const Child = ({ match }) => (
-  <div>
-    <h3>ID: {match.params.id}</h3>
-  </div>
-  // Client.search(match, (products) => {
-  //   this.setState({
-  //     productsSelected: products.slice(0, 1),
-  //   });
-  // })
-);
+// const Child = ({ match }) => (
+//   <div>
+//     <h3>ID: {match.params.id}</h3>
+//   </div>
+//   // Client.search(match, (products) => {
+//   //   this.setState({
+//   //     productsSelected: products.slice(0, 1),
+//   //   });
+//   // })
+// );
 
 export default ProductsContainer;

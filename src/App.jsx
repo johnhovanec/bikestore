@@ -30,15 +30,21 @@ import './App.css';
 // }
 
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         loggedIn: false,
+        shoppingCartTotal: '',
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
+
+  updateShoppingCartTotal(shoppingCartTotal){
+      this.setState({
+        shoppingCartTotal: shoppingCartTotal,
+      });
+    }
 
   handleLogin(event) {
     this.setState({
@@ -64,8 +70,14 @@ class App extends React.Component {
           <Route exact path="/About" component={About} />
           <Route exact path="/products" component={ProductsContainer} />
           <Route exact path="/products/:id" component={ProductDetail} />
-          <Route exact path="/cart" component={ShoppingCart} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route 
+            path="/cart" 
+            render={(props) => <ShoppingCart {...props} updateCartTotal={this.updateShoppingCartTotal.bind(this)} shoppingCartTotal={this.state.shoppingCartTotal} />} 
+          />
+          <Route  
+            path="/checkout" 
+            render={(props) => <Checkout {...props} shoppingCartTotal={this.state.shoppingCartTotal} />}
+          />
           <Route exact path="/register" component={Register} />
           <Route exact path="/productAdd" component={ProductAdd} />
           <Route
