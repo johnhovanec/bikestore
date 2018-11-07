@@ -229,6 +229,27 @@ function handleAddToCartSuccess(response) {
   window.location.href = "http://localhost:3000/products";
 }
 
+
+function handleCheckout(data) {
+  console.log("Calling addProductToCart: " + data);
+  return fetch(`http://localhost:50813/api/orders/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.text())
+      .catch(error =>console.log(error))
+      .then(response => handleCheckoutSuccess(response));
+}
+
+function handleCheckoutSuccess(response) {
+  alert("Order completed");
+  window.location.href = "http://localhost:3000/products";
+}
+
 // Helper method to check the AJAX response
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -410,6 +431,7 @@ const Client = {
   addProductToCart, 
   deleteProductFromCart,
   getShoppingCart,
+  handleCheckout,
   setSessionId,
   setCookie, 
   getCookie, 

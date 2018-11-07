@@ -33,7 +33,6 @@ class ProductDetail extends React.Component {
   }
   
   componentDidMount() {
-    console.log("Product Detail Component mounted and now calling populate for id: " + this.props.match.params.id);
     Client.getProduct(this.props.match.params.id, (product) => {
       this.setState({
         product: product,
