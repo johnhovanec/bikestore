@@ -46,8 +46,8 @@ handleCartTotalUpdate(total){
   this.props.updateCartTotal(total);
 }
 
-handleCartProductUpdate(x){
-  this.props.updateCartProducts(x);
+handleCartProductUpdate(products){
+  this.props.updateCartProducts(products);
 }
 
 sumCart(subtotal) {

@@ -86,7 +86,8 @@ class App extends React.Component {
             path="/cart" 
             render={(props) => <ShoppingCart {...props} 
             updateCartTotal={this.updateShoppingCartTotal.bind(this)} 
-            updateCartProducts={this.updateShoppingCartProducts.bind(this)} />} 
+            updateCartProducts={this.updateShoppingCartProducts.bind(this)} 
+            shoppingCartTotal={this.state.shoppingCartTotal} />}
           />
           <Route  
             path="/checkout" 
