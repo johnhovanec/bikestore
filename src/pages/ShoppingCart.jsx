@@ -14,6 +14,7 @@ class ShoppingCart extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleCartTotalUpdate = this.handleCartTotalUpdate.bind(this);
     this.handleCartProductUpdate = this.handleCartProductUpdate.bind(this);
+    this.handleCheckout = this.handleCheckout.bind(this);
 }
 
   componentDidMount() {
@@ -57,9 +58,13 @@ sumCart(subtotal) {
 }
 
 handleDelete(id) {
-    console.log("Calling handleDelete from Cart on id: ", id);
-    Client.deleteProductFromCart(id);
-  }
+  console.log("Calling handleDelete from Cart on id: ", id);
+  Client.deleteProductFromCart(id);
+}
+
+handleCheckout() {
+  history.push('/Checkout');
+}
 
 
   render() {
@@ -125,7 +130,7 @@ handleDelete(id) {
             </tfoot>
           </table>
           <div className="container text-right">
-            <button className="btn btn-md btn-success">Checkout</button>
+            <button className="btn btn-md btn-success" onClick={this.handleCheckout}>Checkout</button>
           </div>
       </div>
     </div>

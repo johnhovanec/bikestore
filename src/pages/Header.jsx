@@ -79,7 +79,9 @@ class Header extends React.Component {
                     }
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" link="/Cart" href="/Cart">Shopping Cart <FaShoppingCart /></a>
+                      <a className="nav-link" link="/Cart" href="/Cart">Shopping Cart <FaShoppingCart />
+                          {this.props.cartCount.length ? this.props.cartCount.length : -1}
+                      </a>
                     </li>
                 </ul>
             </div>

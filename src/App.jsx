@@ -76,6 +76,7 @@ class App extends React.Component {
           <Header 
             userLoggedIn={this.state.loggedIn}
             loggedInUser={this.state.user}
+            cartCount={this.state.cartProducts}
           />
           <Route exact path="/" component={Home} />
           <Route exact path="/Home" component={Home} />
