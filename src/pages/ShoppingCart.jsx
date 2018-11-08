@@ -11,6 +11,7 @@ class ShoppingCart extends React.Component {
       customerToken: Client.getCookie("customerToken"),
     };
 
+    this.handleCartIdUpdate = this.handleCartIdUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleCartTotalUpdate = this.handleCartTotalUpdate.bind(this);
     this.handleCartProductUpdate = this.handleCartProductUpdate.bind(this);
@@ -32,6 +33,7 @@ class ShoppingCart extends React.Component {
         let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
         this.handleCartTotalUpdate(cartTotal);
         this.handleCartProductUpdate(cartProducts);
+        this.handleCartIdUpdate(cartProducts[0].cartId);
 
         this.setState({
           products: cartProducts.slice(),
@@ -41,6 +43,10 @@ class ShoppingCart extends React.Component {
         });
     }); 
   }
+}
+
+handleCartIdUpdate(cartId){
+  this.props.updateCartId(cartId);
 }
 
 handleCartTotalUpdate(total){

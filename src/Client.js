@@ -33,7 +33,6 @@ function getShoppingCart(query, callback) {
     .catch((error) => console.log(error.message));
 }
 
-
 // Update a product rating using PATCH
 // PATCH api/products/1
 function updateProductRating(id, rating, callback) {

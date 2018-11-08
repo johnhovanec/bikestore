@@ -14,6 +14,7 @@ class Checkout extends React.Component {
       address2: '',
       country: 'USA',
       state: 'Maryland',
+      zip: '',
       shippingSameAsBilling: true,
       cardType: 'Visa',
       nameOnCard: '',
@@ -37,8 +38,8 @@ class Checkout extends React.Component {
   }
 
   handleCheckout(event) {
-    console.log("Calling handleCheckout");
     var data = {
+      cartId: this.props.cartId,
       fName: this.state.fName,
       mName: this.state.mName,
       lName: this.state.lName,
@@ -58,6 +59,8 @@ class Checkout extends React.Component {
       "shoppingCartTotal": this.props.shoppingCartTotal,
       "sessionId": Client.getCookie("customerToken"),
     };
+
+    console.log("Calling handleCheckout data: " + data);
     Client.handleCheckout(data);
   }
 

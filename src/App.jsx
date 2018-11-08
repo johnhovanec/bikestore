@@ -37,6 +37,7 @@ class App extends React.Component {
         loggedIn: false,
         shoppingCartTotal: '',
         cartProducts: [],
+        cartId: '',
         user: '',
     };
     this.handleLogin = this.handleLogin.bind(this);
@@ -51,6 +52,12 @@ class App extends React.Component {
   updateShoppingCartProducts(cartProducts){
     this.setState({
       cartProducts: cartProducts,
+    });
+  }
+
+  updateCartId(cartId){
+    this.setState({
+      cartId: cartId,
     });
   }
 
@@ -87,13 +94,15 @@ class App extends React.Component {
             path="/cart" 
             render={(props) => <ShoppingCart {...props} 
             updateCartTotal={this.updateShoppingCartTotal.bind(this)} 
-            updateCartProducts={this.updateShoppingCartProducts.bind(this)} 
+            updateCartProducts={this.updateShoppingCartProducts.bind(this)}
+            updateCartId={this.updateCartId.bind(this)} 
             shoppingCartTotal={this.state.shoppingCartTotal} />}
           />
           <Route  
             path="/checkout" 
             render={(props) => <Checkout {...props} 
             shoppingCartTotal={this.state.shoppingCartTotal}
+            cartId={this.state.cartId}
             cartProducts={this.state.cartProducts} />}
           />
           <Route exact path="/register" component={Register} />
