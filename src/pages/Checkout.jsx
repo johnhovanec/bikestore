@@ -351,7 +351,7 @@ class Checkout extends React.Component {
                     </div>
                   </div>
                 </div>
-                <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={(e) => this.handleCheckout(e)}>Checkout</button>
+                <button className="btn btn-primary btn-lg btn-block checkoutBtn" type="submit" onClick={(e) => this.handleCheckout(e)}>Checkout</button>
               </form>
             </div>
         </div>

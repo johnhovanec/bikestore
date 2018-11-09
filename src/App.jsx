@@ -10,6 +10,7 @@ import Header from './pages/Header';
 import Home from './pages/Home';
 import About from './pages/About';
 import Checkout from './pages/Checkout';
+import Order from './pages/Order';
 import Register from './pages/Register';
 import ProductAdd from './pages/ProductAdd';
 import Account from './pages/Account';
@@ -89,6 +90,7 @@ class App extends React.Component {
           <Route exact path="/Home" component={Home} />
           <Route exact path="/About" component={About} />
           <Route exact path="/products" component={ProductsContainer} />
+          <Route exact path="/order" component={Order} />
           <Route exact path="/products/:id" component={ProductDetail} />
           <Route 
             path="/cart" 

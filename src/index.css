@@ -41,7 +41,7 @@ body {
   margin: 3px;
 }
 
-.btn a:hover, a:visited, a:link, a:active {
+.checkoutBtn {
     color: #FFFFFF;
     text-decoration: none;
 }

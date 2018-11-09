@@ -33,6 +33,18 @@ function getShoppingCart(query, callback) {
     .catch((error) => console.log(error.message));
 }
 
+// Retrieve order details
+// GET api/shoppingcarts/getsessionuser/${sessionId}
+function getOrder(query, callback) {
+  return fetch(`http://localhost:50813/api/orders/${query}`, {
+    accept: 'application/json',
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(callback)
+    .catch((error) => console.log(error.message));
+}
+
+
 // Update a product rating using PATCH
 // PATCH api/products/1
 function updateProductRating(id, rating, callback) {
@@ -246,7 +258,7 @@ function handleCheckout(data) {
 
 function handleCheckoutSuccess(response) {
   alert("Order completed");
-  window.location.href = "http://localhost:3000/products";
+  window.location.href = "http://localhost:3000/order/" + response.id;
 }
 
 // Helper method to check the AJAX response
@@ -431,6 +443,7 @@ const Client = {
   deleteProductFromCart,
   getShoppingCart,
   handleCheckout,
+  getOrder,
   setSessionId,
   setCookie, 
   getCookie, 
