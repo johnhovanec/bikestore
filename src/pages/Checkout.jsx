@@ -38,6 +38,7 @@ class Checkout extends React.Component {
   }
 
   handleCheckout(event) {
+    event.preventDefault();
     var data = {
       cartId: this.props.cartId,
       fName: this.state.fName,
@@ -60,9 +61,10 @@ class Checkout extends React.Component {
       "cartTotal": this.props.shoppingCartTotal,
       "sessionId": Client.getCookie("customerToken"),
     };
-
-    console.log("Calling handleCheckout data: " + data);
-    Client.handleCheckout(data);
+    
+    Client.handleCheckout(data, (cartId) => {
+      history.push("/orders/" + cartId);
+    });
   }
 
   render() {

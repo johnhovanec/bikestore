@@ -36,7 +36,7 @@ function getShoppingCart(query, callback) {
 // Retrieve order details
 // GET api/shoppingcarts/getsessionuser/${sessionId}
 function getOrder(query, callback) {
-  return fetch(`http://localhost:50813/api/orders/${query}`, {
+  return fetch(`http://localhost:50813/api/orders/confirmation?Id=${query}`, {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON)
@@ -241,8 +241,8 @@ function handleAddToCartSuccess(response) {
 }
 
 
-function handleCheckout(data) {
-  console.log("Calling addProductToCart: " + data);
+function handleCheckout(data, callback) {
+  console.log("Calling Checkout: " + data);
   return fetch(`http://localhost:50813/api/orders/`, {
         method: 'POST',
         mode: 'cors',
@@ -253,13 +253,9 @@ function handleCheckout(data) {
         body: JSON.stringify(data)
       }).then(res => res.text())
       .catch(error =>console.log(error))
-      .then(response => handleCheckoutSuccess(response));
+      .then(response => window.location.href = "http://localhost:3000/orders/" + response);
 }
 
-function handleCheckoutSuccess(response) {
-  alert("Order completed");
-  window.location.href = "http://localhost:3000/order/" + response.id;
-}
 
 // Helper method to check the AJAX response
 function checkStatus(response) {

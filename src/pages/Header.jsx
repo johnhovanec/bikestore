@@ -22,9 +22,6 @@ class Header extends React.Component {
         {path: "/Login", text: "Login", className:"nav-align-right", isActive: false},
         {path: "/Register", text: "Register", isActive: false},
         {path: "/Checkout", text: "Checkout", isActive: false},
-        // {path: "/posttest", text: "post", isActive: false},
-        // {path: "/cart", text: "Add To Cart", isActive: false},
-        // {path: "/getcart", text: "Get Cart", isActive: false},
       ]
     }
   }
@@ -46,8 +43,6 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        {/*<h5>User logged in?: {this.props.userLoggedIn.toString()}</h5>
-        <HeaderGraphic /> */}
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul className="navbar-nav">
@@ -80,7 +75,7 @@ class Header extends React.Component {
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" link="/Cart" href="/Cart">Shopping Cart <FaShoppingCart />
-                          {this.props.cartCount.length ? this.props.cartCount.length : -1}
+                          &nbsp; {this.props.cartCount.length ? this.props.cartCount.length : 0}
                       </a>
                     </li>
                 </ul>

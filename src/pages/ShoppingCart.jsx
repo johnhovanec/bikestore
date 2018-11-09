@@ -75,7 +75,7 @@ handleCheckout() {
 
   render() {
     return (
-      <div className="container text-center">
+      <div className="container text-center mt-5">
         <div className="row">
           <table className='ui selectable structured large table'>
             <thead>

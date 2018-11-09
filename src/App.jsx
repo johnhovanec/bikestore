@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import ProductsPage from './ProductsPage';
-
 import ProductsContainer from './pages/ProductsContainer';
 import ProductDetail from './pages/ProductDetail';
 import ShoppingCart from './pages/ShoppingCart';
@@ -42,6 +41,25 @@ class App extends React.Component {
         user: '',
     };
     this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidMount() {
+    // const token = Client.getCookie("customerToken");
+    // if (token) {
+    //   Client.getShoppingCart(token, (cartProducts) => {
+    //     let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
+    //     this.updateShoppingCartTotal(cartTotal);
+    //     this.updateShoppingCartProducts(cartProducts);
+    //     this.updateCartId(cartProducts[0].cartId);
+
+    //     this.setState({
+    //       products: cartProducts.slice(),
+    //     },() => { 
+    //       // setState is asynchronous, the following is executed after the callback returns
+    //       console.log("Cart total: ", this.state.total)
+    //     });
+    //   }); 
+    // }
   }
 
   updateShoppingCartTotal(shoppingCartTotal){
@@ -90,7 +108,7 @@ class App extends React.Component {
           <Route exact path="/Home" component={Home} />
           <Route exact path="/About" component={About} />
           <Route exact path="/products" component={ProductsContainer} />
-          <Route exact path="/order" component={Order} />
+          <Route exact path="/orders/:id" component={Order} />
           <Route exact path="/products/:id" component={ProductDetail} />
           <Route 
             path="/cart" 

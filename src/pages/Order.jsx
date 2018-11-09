@@ -7,7 +7,10 @@ class Order extends React.Component {
     super(props);
     this.state = {
       products: [],
-      orderDetails: '',
+      subtotal: '',
+      tax: '',
+      shippingCost: '',
+      total: '',
       customerToken: Client.getCookie("customerToken"),
     };
 
@@ -23,15 +26,13 @@ class Order extends React.Component {
     console.log("In Cart: " + Client.getCookie("customerToken"));
 
     if (Client.getCookie("customerToken")) {
-      Client.getShoppingCart(this.state.customerToken, (cartProducts) => {
+      Client.getOrder(this.props.match.params.id, (orderDetails) => {
         this.setState({
-          products: cartProducts.slice(),
-        });
-      });
-
-      Client.getOrder(18, (orderDetails) => {
-        this.setState({
-          orderDetails: orderDetails,
+          products: orderDetails.slice(),
+          subtotal: orderDetails[0].subtotal,
+          tax: orderDetails[0].tax,
+          shippingCost: orderDetails[0].shipping,
+          total: orderDetails[0].total,
         });
       });
     }
@@ -64,7 +65,6 @@ class Order extends React.Component {
             this.state.products.map((product, index) => (
               <tr
                 key={index}
-               
               >
                 <td className='right aligned'>
                   {product.model}
@@ -90,11 +90,11 @@ class Order extends React.Component {
           </tbody>
         </table>
       </div>
-      <div class="d-flex align-items-end flex-column mt-5 mr-4">
-        <div className="mt-4"><span className="font-weight-bold">Subtotal:</span>&emsp;<span className="inline p-2">${this.state.orderDetails.subtotal}</span></div>
-        <div className="mt-4"><span className="font-weight-bold">Shipping:</span>&emsp;<span className="inline p-2">${this.state.orderDetails.shippingCost}</span></div>
-        <div className="mt-4"><span className="font-weight-bold">Tax:</span>&emsp;<span className="inline p-2">${this.state.orderDetails.tax}</span></div>
-        <div className="mt-4"><span className="font-weight-bold">Total:</span>&emsp;<span className="inline p-2">${this.state.orderDetails.total}</span></div>
+      <div className="d-flex align-items-end flex-column mt-5 mr-4">
+        <div className="mt-4"><span className="font-weight-bold">Subtotal:</span>&emsp;<span className="inline p-2">${this.state.subtotal}</span></div>
+        <div className="mt-4"><span className="font-weight-bold">Shipping:</span>&emsp;<span className="inline p-2">${this.state.shippingCost}</span></div>
+        <div className="mt-4"><span className="font-weight-bold">Tax:</span>&emsp;<span className="inline p-2">${this.state.tax}</span></div>
+        <div className="mt-4"><span className="font-weight-bold">Total:</span>&emsp;<span className="inline p-2">${this.state.total}</span></div>
       </div>
     </div>
     );
