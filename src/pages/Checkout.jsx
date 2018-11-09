@@ -48,6 +48,7 @@ class Checkout extends React.Component {
       address2: this.state.address2,
       country: this.state.country,
       state: this.state.state,
+      zip: this.state.zip,
       shippingSameAsBilling: this.state.shippingSameAsBilling,
       cardType: this.state.cardType,
       nameOnCard: this.state.nameOnCard,
@@ -56,7 +57,7 @@ class Checkout extends React.Component {
       cardCVV: this.state.cardCVV,
       sourceCode: this.state.sourceCode,
       "cartProducts": this.props.cartProducts,
-      "shoppingCartTotal": this.props.shoppingCartTotal,
+      "cartTotal": this.props.shoppingCartTotal,
       "sessionId": Client.getCookie("customerToken"),
     };
 
