@@ -141,10 +141,11 @@ class ProductDetail extends React.Component {
     // Regular user or Customer
     if (!Client.getCookie("adminToken")) {
     return (
-      <div className='row d-flex justify-content-center'>
+      <div className='row d-flex justify-content-center mt-5 mb-5'>
+        <img src={this.state.imagePath} height="550" />
       <div className='col-lg-10'>
         <form onSubmit={this.handleCartSubmit}>
-          <table className='ui selectable structured large table'>
+          <table className='ui selectable structured table'>
             <thead>
               <tr>
                 <th colSpan='8'>

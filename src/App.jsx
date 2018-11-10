@@ -44,22 +44,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // const token = Client.getCookie("customerToken");
-    // if (token) {
-    //   Client.getShoppingCart(token, (cartProducts) => {
-    //     let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
-    //     this.updateShoppingCartTotal(cartTotal);
-    //     this.updateShoppingCartProducts(cartProducts);
-    //     this.updateCartId(cartProducts[0].cartId);
+    const token = Client.getCookie("customerToken");
+    if (token) {
+      Client.getShoppingCart(token, (cartProducts) => {
+        let cartTotal = cartProducts.map(x => x.unitPrice * x.quantity).reduce((acc, current) => acc + current, 0);
+        this.updateShoppingCartTotal(cartTotal);
+        this.updateShoppingCartProducts(cartProducts);
+        this.updateCartId(cartProducts[0].cartId);
 
-    //     this.setState({
-    //       products: cartProducts.slice(),
-    //     },() => { 
-    //       // setState is asynchronous, the following is executed after the callback returns
-    //       console.log("Cart total: ", this.state.total)
-    //     });
-    //   }); 
-    // }
+        this.setState({
+          products: cartProducts.slice(),
+        },() => { 
+          // setState is asynchronous, the following is executed after the callback returns
+          console.log("Cart total: ", this.state.total)
+        });
+      }); 
+    }
   }
 
   updateShoppingCartTotal(shoppingCartTotal){

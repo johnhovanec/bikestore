@@ -175,8 +175,8 @@ class ProductSearch extends React.Component {
               </th>
             </tr>
             <tr>
-              <th scope="col">Description</th>
-              <th scope="col">Model</th>
+              <th scope="col" colspan="2" width="250">&emsp;</th>
+              <th scope="col" colspan="3">Model</th>
               <th scope="col">Manufacturer</th>
               <th scope="col">Color</th>
               <th scope="col">Size</th>
@@ -196,7 +196,7 @@ class ProductSearch extends React.Component {
                 key={index}
                 onClick={() => this.props.onProductClick(product)}
               >
-                <td>{product.description}</td>
+                <td><img src={product.imagePath} width="200" /></td>
                 <td className='right aligned'>
                   {product.model}
                 </td>
