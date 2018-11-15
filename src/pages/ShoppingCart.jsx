@@ -75,7 +75,7 @@ handleCheckout() {
 
   render() {
     return (
-      <div className="container text-center mt-5">
+      <div className="container text-center mt-5 d-flex justify-content-center">
         <div className="row">
           <table className='ui selectable structured large table'>
             <thead>

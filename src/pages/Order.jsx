@@ -40,7 +40,7 @@ class Order extends React.Component {
 
   render() {
     return (
-      <div className="container text-center filler mt-5">
+      <div className="container text-center filler mt-5 col-md-6">
         <div className="row">
           <table className='table'>
             <thead>

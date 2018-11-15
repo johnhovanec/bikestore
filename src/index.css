@@ -46,13 +46,6 @@ body {
     text-decoration: none;
 }
 
-.homeCard {
-/*  margin: 10px;
-  padding: 50px;
-  border: 1px solid #c0c0c06b;
-  border-radius: 10px;*/
-/*  position: absolute;
-  top: 60px;
-  left: -1300px;
-  z-index: -100;*/
+.centerContent {
+  margin: auto;
 }

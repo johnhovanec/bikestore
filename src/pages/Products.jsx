@@ -115,8 +115,8 @@ class ProductSearch extends React.Component {
 
   render() {
     return (
-      <div id="row">
-        <table className='row col-md-10 table table-hover'>
+      <div id="row" className="d-flex justify-content-center">
+        <table className='row col-md-10 table table-hover centerContent'>
           <thead>
             <tr>
               <th scope="col" colSpan='12'>
@@ -175,8 +175,8 @@ class ProductSearch extends React.Component {
               </th>
             </tr>
             <tr>
-              <th scope="col" colspan="2" width="250">&emsp;</th>
-              <th scope="col" colspan="3">Model</th>
+              <th scope="col" colSpan="2" width="250">&emsp;</th>
+              <th scope="col" colSpan="3">Model</th>
               <th scope="col">Manufacturer</th>
               <th scope="col">Color</th>
               <th scope="col">Size</th>

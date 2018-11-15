@@ -23,7 +23,7 @@ class ProductsContainer extends React.Component {
   render() {
     return (
       <div className='App'>
-        <div className='container'>
+        <div className='container text-center mt-5'>
           <Products
             onProductClick={
               (product) => (

@@ -79,9 +79,7 @@ class Checkout extends React.Component {
       <div className="container filler">
         <div className="d-flex justify-content-center">
           <div className="col-md-8">
-            <h3>${this.props.shoppingCartTotal}</h3>
-            <h5># {this.props.cartProducts.length}</h5>
-              <h4 className="mb-3">Billing address</h4>
+              <h4 className="text-center mb-3">Billing address</h4>
               <form className="needs-validation" noValidate>
                 <div className="row">
                   <div className="col-md-6 mb-3">
