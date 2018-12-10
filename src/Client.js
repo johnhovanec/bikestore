@@ -274,21 +274,21 @@ function parseJSON(response) {
   return response.json();
 }
 
-function setCookie(name, value, duration) {
-    var expires = "";
+function setCookie(id, content, duration) {
+    var expiration = "";
     if (duration) {
         var date = new Date();
-        date.setTime(date.getTime() + (duration * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
+        date.setTime(date.getTime() + (duration * 1000 * 60 * 60 * 24));
+        expiration = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    document.cookie = id + "=" + (content || " ")  + expiration + "; path=/";
 }
 
-function getCookie(name) {
-    var targetCookie = name + "=";
-    var documentCookies = document.cookie.split(';');
+function getCookie(id) {
+    let targetCookie = id + "=";
+    let documentCookies = document.cookie.split(';');
     for(var i = 0; i < documentCookies.length; i++) {
-        var cookie = documentCookies[i];
+        let cookie = documentCookies[i];
         while (cookie.charAt(0) === ' ') {
           cookie = cookie.substring(1, cookie.length);
         }
@@ -299,8 +299,8 @@ function getCookie(name) {
     return false;
 }
 
-function deleteCookie(name) {   
-    document.cookie = name+'=; Max-Age=-99999999;';  
+function deleteCookie(id) {   
+    document.cookie = id + '=; Max-Age=-99999999;';  
 }
 
 function registerNewCustomer(username, email, password, phone, fName, mName, lName) {
